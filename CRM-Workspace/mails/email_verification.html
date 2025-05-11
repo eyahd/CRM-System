@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>E-Mail bestätigen</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6">
+    <h2>Willkommen bei unserem Service!</h2>
+    <p>Hallo,</p>
+    <p>
+      bitte bestätigen Sie Ihre E-Mail-Adresse, indem Sie auf den folgenden Link
+      klicken:
+    </p>
+    <p>
+      <a
+        href="{{verification_link}}"
+        style="
+          background-color: #4caf50;
+          color: white;
+          padding: 10px 15px;
+          text-decoration: none;
+          border-radius: 5px;
+        "
+      >
+        E-Mail-Adresse bestätigen
+      </a>
+    </p>
+    <p>
+      Falls der Button nicht funktioniert, kopieren Sie bitte diesen Link in die
+      Adresszeile Ihres Browsers:
+    </p>
+    <p>{{verification_link}}</p>
+    <p>Vielen Dank!</p>
+  </body>
+</html>

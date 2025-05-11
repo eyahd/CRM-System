@@ -1,0 +1,8 @@
+{
+    "name": "nick/crm-workspace",
+    "description": "CustomerRelationshipManagement",
+    "minimum-stability": "stable",
+    "require": {
+        "phpmailer/phpmailer": "^6.10"
+    }
+}

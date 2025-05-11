@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin-Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Admin-Dashboard</h1>
+
+  <!-- Suchfeld -->
+  <form method="GET" action="admin_dashboard.php">
+    <input type="text" name="suche" placeholder="Suche nach E-Mail, Name, ID...">
+    <select name="rolle">
+      <option value="">Alle Rollen</option>
+      <option value="kunde">Kunden</option>
+      <option value="admin">Admins</option>
+    </select>
+    <button type="submit">Suchen</button>
+  </form>
+
+  <!-- Button zum Hinzufügen -->
+  <form action="benutzer_bearbeiten.php" method="GET">
+    <button type="submit">+ Benutzer hinzufügen</button>
+  </form>
+
+  <!-- Ergebnisliste (z.B. über PHP gerendert) -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>E-Mail</th>
+        <th>Rolle</th>
+        <th>Offene Rechnungen</th>
+        <th>Aktion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- PHP: Schleife über Ergebnisse aus Datenbank -->
+      <!-- Beispiel: -->
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <a href="benutzer_bearbeiten.php?id=1">Bearbeiten</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
