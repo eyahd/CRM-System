@@ -1,0 +1,149 @@
+
+
+.invalid {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+.fehlertext {
+  color: red;
+  font-size: 0.9em;
+}
+/* === Basis-Reset & Schrift === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f3f3f3;
+  color: #333;
+  padding: 40px 20px;
+  line-height: 1.6;
+}
+
+/* === Formular-Container (zentriert & responsiv) === */
+form {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* === Überschriften === */
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+/* === Fieldsets & Legenden === */
+fieldset {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  padding: 20px;
+}
+
+legend {
+  font-weight: bold;
+  padding: 0 10px;
+  font-size: 1.1em;
+}
+
+/* === Labels & Eingabefelder === */
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: border 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+/* === Hinweistext / Fehlertext === */
+.fehlertext {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+/* === Button Styling === */
+button {
+  display: block;
+  width: 100%;
+  background-color: #0066cc;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #004d99;
+}
+
+/* === Responsive Optimierung === */
+@media (max-width: 768px) {
+  body {
+    padding: 20px 10px;
+  }
+
+  form {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}
+
+.container {
+  background: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.button-group {
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 12px 24px;
+  background-color: #0066cc;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #004d99;
+}
+
+

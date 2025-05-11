@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kundenregistrierung</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h2 style="text-align: center">Kundenregistrierung</h2>
+    <form action="registrieren.php" method="post">
+      <fieldset>
+        <legend>Allgemeine Daten</legend>
+
+        <label for="typ">Kundentyp</label>
+        <select name="typ" id="typ" onchange="toggleFirmenfelder()" required>
+          <option value="privat">Privatkunde</option>
+          <option value="geschaeft">Geschäftskunde</option>
+        </select>
+
+        <label for="vorname">Vorname</label>
+        <input type="text" name="vorname" id="vorname" required />
+
+        <label for="nachname">Nachname</label>
+        <input type="text" name="nachname" id="nachname" required />
+
+        <label for="email">E-Mail</label>
+        <input type="email" name="email" id="email" required />
+
+        <label for="passwort">Passwort</label>
+        <input
+          type="password"
+          name="passwort"
+          id="passwort"
+          placeholder="Das Passwort muss mindestens 8 Zeichen lang sein!"
+          minlength="8"
+          required
+        />
+
+        <label for="passwort2">Passwort wiederholen</label>
+        <input
+          type="password"
+          name="passwort2"
+          id="passwort2"
+          required
+          minlength="8"
+          required
+        />
+      </fieldset>
+
+      <fieldset id="firmenfelder" style="display: none">
+        <legend>Firmendaten</legend>
+
+        <label for="firmenname">Firmenname</label>
+        <input type="text" name="firmenname" id="firmenname" />
+
+        <label for="ust_id">USt-ID</label>
+        <input type="text" name="ust_id" id="ust_id" />
+      </fieldset>
+
+      <fieldset>
+        <legend>Adresse & Kontakt</legend>
+
+        <label for="telefon">Telefon</label>
+        <input type="tel" name="telefon" id="telefon" required />
+
+        <label for="strasse">Straße</label>
+        <input type="text" name="strasse" id="strasse" required />
+
+        <label for="plz">PLZ</label>
+        <input type="text" name="plz" id="plz" required />
+
+        <label for="ort">Ort</label>
+        <input type="text" name="ort" id="ort" required />
+
+        <label for="land">Land</label>
+        <input type="text" name="land" id="land" required />
+      </fieldset>
+
+      <fieldset>
+        <legend>Kontoverbindung</legend>
+
+        <label for="iban">IBAN:</label>
+        <input type="text" id="iban" name="iban" placeholder="DE..." required />
+        <small id="iban-fehler" class="fehlertext"></small>
+
+        <label for="bic">BIC</label>
+        <input type="text" name="bic" id="bic" required />
+      </fieldset>
+
+      <fieldset>
+        <legend>Bonität</legend>
+
+        <label for="bonitaet_score">Bonitätsscore (0–255)</label>
+        <input
+          type="number"
+          name="bonitaet_score"
+          id="bonitaet_score"
+          min="0"
+          max="255"
+          value="0"
+          required
+        />
+      </fieldset>
+
+      <button type="submit">Registrieren</button>
+    </form>
+    <script src="js/iban.js"></script>
+    <script src="js/script.js"></script>
+    <!-- Auf vollständigem HTML-DOM load warten -->
+  </body>
+</html>

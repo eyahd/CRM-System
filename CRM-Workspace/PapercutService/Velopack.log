@@ -1,0 +1,126 @@
+[stub:17756] [03:51:01] [INFO] --
+[stub:17756] [03:51:01] [INFO] Starting Velopack Stub (at "C:\\xampp\\htdocs\\CRM-Workspace\\PapercutService\\Papercut SMTP.exe")
+[stub:17756] [03:51:01] [INFO] Stub about to start Update.exe (C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe) with args: ["start", "--"]
+[update:20596] [03:51:01] [INFO] --
+[update:20596] [03:51:01] [INFO] Starting Velopack Updater (0.0.626)
+[update:20596] [03:51:01] [INFO]     Location: C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe
+[update:20596] [03:51:01] [INFO]     CWD: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:20596] [03:51:01] [INFO]     Verbose: false
+[update:20596] [03:51:01] [INFO]     Silent: false
+[update:20596] [03:51:01] [INFO]     Log File: None
+[update:20596] [03:51:01] [INFO] Command: Start
+[update:20596] [03:51:01] [INFO]     Wait: NoWait
+[update:20596] [03:51:01] [INFO]     Exe Name: None
+[update:20596] [03:51:01] [INFO]     Exe Args: None
+[update:20596] [03:51:01] [INFO] Loaded manifest for application: PapercutSMTP
+[update:20596] [03:51:01] [INFO] Root Directory: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:20596] [03:51:01] [INFO] Attempting to open global system mutex: 'velopack-PapercutSMTP'
+[update:20596] [03:51:01] [INFO] About to launch: 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current\Papercut.exe' in dir 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current'
+[stub:9760] [03:51:18] [INFO] --
+[stub:9760] [03:51:18] [INFO] Starting Velopack Stub (at "C:\\xampp\\htdocs\\CRM-Workspace\\PapercutService\\Papercut SMTP.exe")
+[stub:9760] [03:51:18] [INFO] Stub about to start Update.exe (C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe) with args: ["start", "--"]
+[update:21048] [03:51:18] [INFO] --
+[update:21048] [03:51:18] [INFO] Starting Velopack Updater (0.0.626)
+[update:21048] [03:51:18] [INFO]     Location: C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe
+[update:21048] [03:51:18] [INFO]     CWD: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:21048] [03:51:18] [INFO]     Verbose: false
+[update:21048] [03:51:18] [INFO]     Silent: false
+[update:21048] [03:51:18] [INFO]     Log File: None
+[update:21048] [03:51:18] [INFO] Command: Start
+[update:21048] [03:51:18] [INFO]     Wait: NoWait
+[update:21048] [03:51:18] [INFO]     Exe Name: None
+[update:21048] [03:51:18] [INFO]     Exe Args: None
+[update:21048] [03:51:18] [INFO] Loaded manifest for application: PapercutSMTP
+[update:21048] [03:51:18] [INFO] Root Directory: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:21048] [03:51:18] [INFO] Attempting to open global system mutex: 'velopack-PapercutSMTP'
+[update:21048] [03:51:18] [INFO] About to launch: 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current\Papercut.exe' in dir 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current'
+[stub:21512] [03:55:05] [INFO] --
+[stub:21512] [03:55:05] [INFO] Starting Velopack Stub (at "C:\\xampp\\htdocs\\CRM-Workspace\\PapercutService\\Papercut SMTP.exe")
+[stub:21512] [03:55:05] [INFO] Stub about to start Update.exe (C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe) with args: ["start", "--"]
+[update:17260] [03:55:05] [INFO] --
+[update:17260] [03:55:05] [INFO] Starting Velopack Updater (0.0.626)
+[update:17260] [03:55:05] [INFO]     Location: C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe
+[update:17260] [03:55:05] [INFO]     CWD: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:17260] [03:55:05] [INFO]     Verbose: false
+[update:17260] [03:55:05] [INFO]     Silent: false
+[update:17260] [03:55:05] [INFO]     Log File: None
+[update:17260] [03:55:05] [INFO] Command: Start
+[update:17260] [03:55:05] [INFO]     Wait: NoWait
+[update:17260] [03:55:05] [INFO]     Exe Name: None
+[update:17260] [03:55:05] [INFO]     Exe Args: None
+[update:17260] [03:55:05] [INFO] Loaded manifest for application: PapercutSMTP
+[update:17260] [03:55:05] [INFO] Root Directory: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:17260] [03:55:05] [INFO] Attempting to open global system mutex: 'velopack-PapercutSMTP'
+[update:17260] [03:55:05] [INFO] About to launch: 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current\Papercut.exe' in dir 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current'
+[stub:6004] [15:21:51] [INFO] --
+[stub:6004] [15:21:51] [INFO] Starting Velopack Stub (at "C:\\xampp\\htdocs\\CRM-Workspace\\PapercutService\\Papercut SMTP.exe")
+[stub:6004] [15:21:51] [INFO] Stub about to start Update.exe (C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe) with args: ["start", "--"]
+[update:15152] [15:21:51] [INFO] --
+[update:15152] [15:21:51] [INFO] Starting Velopack Updater (0.0.626)
+[update:15152] [15:21:51] [INFO]     Location: C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe
+[update:15152] [15:21:51] [INFO]     CWD: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:15152] [15:21:51] [INFO]     Verbose: false
+[update:15152] [15:21:51] [INFO]     Silent: false
+[update:15152] [15:21:51] [INFO]     Log File: None
+[update:15152] [15:21:51] [INFO] Command: Start
+[update:15152] [15:21:51] [INFO]     Wait: NoWait
+[update:15152] [15:21:51] [INFO]     Exe Name: None
+[update:15152] [15:21:51] [INFO]     Exe Args: None
+[update:15152] [15:21:51] [INFO] Loaded manifest for application: PapercutSMTP
+[update:15152] [15:21:51] [INFO] Root Directory: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:15152] [15:21:51] [INFO] Attempting to open global system mutex: 'velopack-PapercutSMTP'
+[update:15152] [15:21:51] [INFO] About to launch: 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current\Papercut.exe' in dir 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current'
+[stub:18576] [18:24:04] [INFO] --
+[stub:18576] [18:24:04] [INFO] Starting Velopack Stub (at "C:\\xampp\\htdocs\\CRM-Workspace\\PapercutService\\Papercut SMTP.exe")
+[stub:18576] [18:24:04] [INFO] Stub about to start Update.exe (C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe) with args: ["start", "--"]
+[update:21724] [18:24:04] [INFO] --
+[update:21724] [18:24:04] [INFO] Starting Velopack Updater (0.0.626)
+[update:21724] [18:24:04] [INFO]     Location: C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe
+[update:21724] [18:24:04] [INFO]     CWD: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:21724] [18:24:04] [INFO]     Verbose: false
+[update:21724] [18:24:04] [INFO]     Silent: false
+[update:21724] [18:24:04] [INFO]     Log File: None
+[update:21724] [18:24:04] [INFO] Command: Start
+[update:21724] [18:24:04] [INFO]     Wait: NoWait
+[update:21724] [18:24:04] [INFO]     Exe Name: None
+[update:21724] [18:24:04] [INFO]     Exe Args: None
+[update:21724] [18:24:04] [INFO] Loaded manifest for application: PapercutSMTP
+[update:21724] [18:24:04] [INFO] Root Directory: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:21724] [18:24:04] [INFO] Attempting to open global system mutex: 'velopack-PapercutSMTP'
+[update:21724] [18:24:04] [INFO] About to launch: 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current\Papercut.exe' in dir 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current'
+[stub:5612] [12:44:22] [INFO] --
+[stub:5612] [12:44:22] [INFO] Starting Velopack Stub (at "C:\\xampp\\htdocs\\CRM-Workspace\\PapercutService\\Papercut SMTP.exe")
+[stub:5612] [12:44:22] [INFO] Stub about to start Update.exe (C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe) with args: ["start", "--"]
+[update:14428] [12:44:22] [INFO] --
+[update:14428] [12:44:22] [INFO] Starting Velopack Updater (0.0.626)
+[update:14428] [12:44:22] [INFO]     Location: C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe
+[update:14428] [12:44:22] [INFO]     CWD: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:14428] [12:44:22] [INFO]     Verbose: false
+[update:14428] [12:44:22] [INFO]     Silent: false
+[update:14428] [12:44:22] [INFO]     Log File: None
+[update:14428] [12:44:22] [INFO] Command: Start
+[update:14428] [12:44:22] [INFO]     Wait: NoWait
+[update:14428] [12:44:22] [INFO]     Exe Name: None
+[update:14428] [12:44:22] [INFO]     Exe Args: None
+[update:14428] [12:44:22] [INFO] Loaded manifest for application: PapercutSMTP
+[update:14428] [12:44:22] [INFO] Root Directory: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:14428] [12:44:22] [INFO] Attempting to open global system mutex: 'velopack-PapercutSMTP'
+[update:14428] [12:44:22] [INFO] About to launch: 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current\Papercut.exe' in dir 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current'
+[stub:19748] [13:16:36] [INFO] --
+[stub:19748] [13:16:36] [INFO] Starting Velopack Stub (at "C:\\xampp\\htdocs\\CRM-Workspace\\PapercutService\\Papercut SMTP.exe")
+[stub:19748] [13:16:36] [INFO] Stub about to start Update.exe (C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe) with args: ["start", "--"]
+[update:16308] [13:16:36] [INFO] --
+[update:16308] [13:16:36] [INFO] Starting Velopack Updater (0.0.626)
+[update:16308] [13:16:36] [INFO]     Location: C:\xampp\htdocs\CRM-Workspace\PapercutService\Update.exe
+[update:16308] [13:16:36] [INFO]     CWD: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:16308] [13:16:36] [INFO]     Verbose: false
+[update:16308] [13:16:36] [INFO]     Silent: false
+[update:16308] [13:16:36] [INFO]     Log File: None
+[update:16308] [13:16:36] [INFO] Command: Start
+[update:16308] [13:16:36] [INFO]     Wait: NoWait
+[update:16308] [13:16:36] [INFO]     Exe Name: None
+[update:16308] [13:16:36] [INFO]     Exe Args: None
+[update:16308] [13:16:36] [INFO] Loaded manifest for application: PapercutSMTP
+[update:16308] [13:16:36] [INFO] Root Directory: C:\xampp\htdocs\CRM-Workspace\PapercutService
+[update:16308] [13:16:36] [INFO] Attempting to open global system mutex: 'velopack-PapercutSMTP'
+[update:16308] [13:16:36] [INFO] About to launch: 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current\Papercut.exe' in dir 'C:\xampp\htdocs\CRM-Workspace\PapercutService\current'

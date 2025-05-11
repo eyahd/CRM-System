@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<metadata>
+<id>PapercutSMTP</id>
+<title>Papercut SMTP</title>
+<description>Papercut SMTP</description>
+<authors>PapercutSMTP</authors>
+<version>7.0.1</version>
+<channel>win-x64-stable</channel>
+<mainExe>Papercut.exe</mainExe>
+<os>win</os>
+<rid>win</rid>
+<runtimeDependencies>net8-x64-desktop,webview2</runtimeDependencies>
+<shortcutLocations>Desktop,StartMenuRoot</shortcutLocations>
+<shortcutAmuid>velopack.PapercutSMTP</shortcutAmuid>
+<releaseNotes># Release Notes
+
+## Papercut SMTP v7.0.0 [2024-05-17]
+
+_NOTE: Uninstall any existing Papercut SMTP installations BEFORE installing this new version._
+
+- Upgraded to .NET 8
+- Upgraded to latest dependencies (Caliburn Micro, Autofac, MahApps) and associated systems to support .NET 8.
+- Switched to [Velopack](https://github.com/velopack/velopack) auto-upgradable installation system. Great project! (Thanks, [caesay](https://github.com/caesay)!)
+- Fix for log updating constantly causing unnecessary WebView2 loading. (PR thanks to [arthurzaczek](https://github.com/arthurzaczek))
+</releaseNotes>
+<releaseNotesHtml><![CDATA[
+<h1>Release Notes</h1>
+<h2>Papercut SMTP v7.0.0 [2024-05-17]</h2>
+<p><em>NOTE: Uninstall any existing Papercut SMTP installations BEFORE installing this new version.</em></p>
+<ul>
+<li>Upgraded to .NET 8</li>
+<li>Upgraded to latest dependencies (Caliburn Micro, Autofac, MahApps) and associated systems to support .NET 8.</li>
+<li>Switched to <a href="https://github.com/velopack/velopack">Velopack</a> auto-upgradable installation system. Great project! (Thanks, <a href="https://github.com/caesay">caesay</a>!)</li>
+<li>Fix for log updating constantly causing unnecessary WebView2 loading. (PR thanks to <a href="https://github.com/arthurzaczek">arthurzaczek</a>)</li>
+</ul>
+
+]]></releaseNotesHtml>
+</metadata>
+</package>
