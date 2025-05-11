@@ -1,4 +1,4 @@
-// Anzeigen oder Verstecken der Firmenfelder je nach Typauswahl
+// Zeigt oder versteckt Firmenfelder basierend auf dem Kundentyp
 function toggleFirmenfelder() {
   const typ = document.getElementById("typ")?.value;
   const firmenfelder = document.getElementById("firmenfelder");
@@ -8,18 +8,49 @@ function toggleFirmenfelder() {
   if (!typ || !firmenfelder || !firmenname || !ust_id) return;
 
   const anzeigen = typ === "geschaeft";
-
   firmenfelder.style.display = anzeigen ? "block" : "none";
-  firmenname.toggleAttribute("required", anzeigen);
-  ust_id.toggleAttribute("required", anzeigen);
-}
-// Anzeigen oder Verstecken vom Admin oder Kunde
-function toggleKundentyp(value) {
-    const container = document.getElementById('kundentyp-container');
-    container.style.display = value === 'kunde' ? 'block' : 'none';
+  firmenname.required = anzeigen;
+  ust_id.required = anzeigen;
 }
 
-// Prüft, ob die Passwörter gleich und lang genug sind
+function toggleKundenfelder(rolle) {
+  const kundenbereiche = document.querySelectorAll(".kunde-feld");
+  const anzeigen = rolle === "kunde";
+
+  kundenbereiche.forEach((bereich) => {
+    bereich.style.display = anzeigen ? "" : "none";
+    // Alle Formularelemente innerhalb deaktivieren/aktivieren
+    bereich.querySelectorAll("input, select, textarea").forEach((el) => {
+      el.disabled = !anzeigen;
+    });
+  });
+}
+
+// Zeigt oder versteckt den Kundentyp-Container (nur für Kunden relevant)
+function toggleKundentyp(rolle) {
+  const container = document.getElementById("kundentyp-container");
+  if (container) {
+    container.style.display = rolle === "kunde" ? "block" : "none";
+  }
+}
+
+// Validiert die IBAN beim Verlassen des Eingabefeldes
+function initIbanValidation() {
+  const ibanInput = document.getElementById("iban");
+  const fehlerText = document.getElementById("iban-fehler");
+
+  if (ibanInput && fehlerText) {
+    ibanInput.addEventListener("blur", () => {
+      const isValid = IBAN.isValid(ibanInput.value.trim());
+      ibanInput.classList.toggle("invalid", !isValid);
+      fehlerText.textContent = isValid
+        ? ""
+        : "Bitte geben Sie eine gültige IBAN ein.";
+    });
+  }
+}
+
+// Prüft die Passwortfelder auf Übereinstimmung und Mindestlänge
 function checkPasswortGleichheit(event) {
   const pw1 = document.getElementById("passwort")?.value || "";
   const pw2 = document.getElementById("passwort2")?.value || "";
@@ -39,52 +70,34 @@ function checkPasswortGleichheit(event) {
   return true;
 }
 
-// Validiert die IBAN bei Verlassen des Eingabefeldes
-function validateIban() {
-  const ibanInput = document.getElementById("iban");
-  const fehlerText = document.getElementById("iban-fehler");
-
-  if (!ibanInput || !fehlerText) return;
-
-  ibanInput.addEventListener("blur", () => {
-    const iban = ibanInput.value.trim();
-
-    const isValid = IBAN.isValid(iban);
-    ibanInput.classList.toggle("invalid", !isValid);
-    fehlerText.textContent = isValid
-      ? ""
-      : "Bitte geben Sie eine gültige IBAN ein.";
-  });
-}
-
-// Initialisierung bei DOM-Load
-// Initialisierung bei DOM-Load
 window.addEventListener("DOMContentLoaded", () => {
   toggleFirmenfelder();
-  validateIban();
+
+  const rolleElement = document.getElementById("rolle");
+  if (rolleElement) {
+    const rolle = rolleElement.value;
+    toggleKundentyp(rolle);
+    toggleKundenfelder(rolle); // ✅ Korrekte Übergabe des Rollenwerts
+
+    rolleElement.addEventListener("change", (e) => {
+      const neueRolle = e.target.value;
+      toggleKundentyp(neueRolle);
+      toggleKundenfelder(neueRolle); // ✅ beim Wechsel auch neu setzen
+    });
+  }
+
+  initIbanValidation();
 
   const form = document.querySelector("form");
-  if (form) {
-    // Nur hinzufügen, wenn Passwortfelder existieren
-    const pw1 = document.getElementById("passwort");
-    const pw2 = document.getElementById("passwort2");
+  const pw1 = document.getElementById("passwort");
+  const pw2 = document.getElementById("passwort2");
 
-    if (pw1 && pw2) {
-      form.addEventListener("submit", checkPasswortGleichheit);
-    }
+  if (form && pw1 && pw2) {
+    form.addEventListener("submit", checkPasswortGleichheit);
   }
 
   const typElement = document.getElementById("typ");
   if (typElement) {
     typElement.addEventListener("change", toggleFirmenfelder);
   }
-
-  const rolleElement = document.getElementById("rolle");
-  if (rolleElement) {
-    toggleKundentyp(rolleElement.value);
-    rolleElement.addEventListener("change", function () {
-      toggleKundentyp(this.value);
-    });
-  }
 });
-
