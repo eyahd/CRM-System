@@ -58,7 +58,7 @@ CREATE TABLE `kunden` (
 --
 
 INSERT INTO `kunden` (`id`, `typ`, `vorname`, `nachname`, `email`, `passwort_hash`, `telefon`, `strasse`, `plz`, `ort`, `land`, `firmenname`, `ust_id`, `bonitaet_score`, `iban`, `bic`, `registrierungsdatum`, `email_verification_token`, `email_verification_expires`, `rolle`, `passwort_reset_token`, `passwort_reset_expires`, `offene_rechnungen`) VALUES
-(38, 'privat', 'admin', '', 'admin@kundenverwaltung.de', '$2y$10$vSakvrCjKx8hsJJCGIlD8OTGkUxfSAAULg21/DLDC.5lf7j/h97yC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-05-07 01:59:03', NULL, NULL, 'admin', NULL, NULL, 0);
+(1, '', 'admin', '', 'admin@kundenverwaltung.de', '$2y$10$vSakvrCjKx8hsJJCGIlD8OTGkUxfSAAULg21/DLDC.5lf7j/h97yC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-05-07 01:59:03', NULL, NULL, 'admin', NULL, NULL, 0);
 
 
 --
