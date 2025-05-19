@@ -6,5 +6,7 @@ return [
     'username' => '',
     'password' => '',
     'from_email' => 'noreply@Autovermietung.com',
-    'from_name' => 'Kundenportal'
+    'from_name' => 'Kundenportal',
+    'charset' => 'UTF-8',         // neu: Zeichensatz für Umlaute
+    'encoding' => 'base64'        // neu: Encoding-Methode für den Mailtext
 ];

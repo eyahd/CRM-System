@@ -46,7 +46,7 @@ $_SESSION['email'] = $user['email'];
 
 // Weiterleitung je nach Rolle
 if ($user['rolle'] === 'admin') {
-    header("Location: admin_dashboard.html"); // Placeholder
+    header("Location: admin_dashboard.php"); // Placeholder
     exit;
 } elseif ($user['rolle'] === 'kunde') {
     header("Location: kunden_dashboard.php"); // z. B. für Kundendaten ändern

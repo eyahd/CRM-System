@@ -1,30 +1,97 @@
 <?php
-require_once 'db_config.php'; 
-// Müssen für jeden Admin manuelll eingegeben werden!
-$vorname = "admin"; // Vorname des Admins
-$passwort_klar = "NichtErmittelbar!"; // Passwort des Admins (klartext)
-$rolle = "admin"; 
-$email = "admin@kundenverwaltung.de"; // E-Mail des Admins
+session_start();
+require_once 'db_config.php';
+require_once 'mailer.php';
 
-// Passwort hashen
-$passwort_hash = password_hash($passwort_klar, PASSWORD_DEFAULT);
-
-try {
-    $db = Database::getInstance()->getConnection();
-
-    $sql = "INSERT INTO kunden (vorname, passwort_hash, rolle, email) 
-            VALUES (:vorname, :passwort_hash, :rolle, :email)";
-    
-    $stmt = $db->prepare($sql);
-    
-    $stmt->bindParam(':vorname', $vorname);
-    $stmt->bindParam(':passwort_hash', $passwort_hash);
-    $stmt->bindParam(':rolle', $rolle);
-    $stmt->bindParam(':email', $email);
-
-    $stmt->execute();
-
-    echo "Admin erfolgreich angelegt!";
-} catch (PDOException $e) {
-    echo "Fehler bei der Admin-Erstellung: " . $e->getMessage();
+if (!isset($_SESSION['user_id']) || $_SESSION['rolle'] !== 'admin') {
+    die("Zugriff verweigert.");
 }
+
+$pdo = Database::getInstance()->getConnection();
+$fehlermeldung = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $vorname = trim($_POST['vorname']);
+    $nachname = trim($_POST['nachname']);
+    $email = trim($_POST['email']);
+    $passwort = $_POST['passwort'];
+
+    // E-Mail prüfen
+    $stmt = $pdo->prepare("SELECT id FROM kunden WHERE email = :email");
+    $stmt->execute(['email' => $email]);
+    if ($stmt->fetch()) {
+        $fehlermeldung = "Ein Benutzer mit dieser E-Mail existiert bereits.";
+    } else {
+        // Passwort hashen
+        $hash = password_hash($passwort, PASSWORD_DEFAULT);
+
+        // In DB einfügen
+        $stmt = $pdo->prepare("INSERT INTO kunden (vorname, nachname, email, passwort_hash, rolle) 
+                               VALUES (:vorname, :nachname, :email, :passwort, 'admin')");
+        if ($stmt->execute([
+            'vorname' => $vorname,
+            'nachname' => $nachname,
+            'email' => $email,
+            'passwort' => $hash
+        ])) {
+            // Bestätigung per E-Mail
+            sendeEmail(
+                typ: 'admin_hinzufuegen',
+                empfaenger_email: $email,
+                empfaenger_name: "$vorname $nachname",
+                daten: [
+                    'vorname' => $vorname,
+                    'nachname' => $nachname,
+                    'email' => $email,
+                    'login_link' => 'https://localhost/CRM-Workspace/login.html',
+                    'passwort' => $passwort 
+                ]
+            );
+        } else {
+            $fehlermeldung = "Fehler beim Hinzufügen des Admins.";
+        }
+
+        echo "Admin wurde erfolgreich hinzugefügt.";
+        echo '<meta http-equiv="refresh" content="2; URL=admin_dashboard.php">';
+        exit;
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin hinzufügen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h2>Neuen Admin anlegen</h2>
+<!-- Styles überarbeiten und allgemeine vorlage verwenden für alle Seiten -->
+    <?php if ($fehlermeldung): ?>
+        <p style="color: red;"><?= htmlspecialchars($fehlermeldung) ?></p>
+    <?php endif; ?>
+
+    <form method="POST">
+        <label>Vorname:</label>
+        <input type="text" name="vorname" required><br>
+
+        <label>Nachname:</label>
+        <input type="text" name="nachname" required><br>
+
+        <label>E-Mail:</label>
+        <input type="email" name="email" required><br>
+
+        <label>Passwort:</label>
+        <input type="password" name="passwort" minlength="8"><br>
+
+        <button type="submit">Admin erstellen</button>
+    </form>
+
+    <br>
+    <a href="admin_dashboard.php">Zurück zum Dashboard</a>
+</body>
+
+</html>

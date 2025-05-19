@@ -15,12 +15,20 @@ $rolleFilter = $_GET['rolle'] ?? '';
 $sql = "SELECT id, vorname, nachname, email, rolle, offene_rechnungen FROM kunden WHERE 1=1";
 $params = [];
 
+// Suche nach Name, E-Mail oder ID
 if (!empty($suche)) {
-    $sql .= " AND (email LIKE :suche OR vorname LIKE :suche OR nachname LIKE :suche OR id LIKE :suche_exact)";
+    $sql .= " AND (email LIKE :suche OR vorname LIKE :suche OR nachname LIKE :suche";
     $params[':suche'] = "%$suche%";
-    $params[':suche_exact'] = $suche;
+
+    if (ctype_digit($suche)) {
+        $sql .= " OR id = :id";
+        $params[':id'] = (int)$suche;
+    }
+
+    $sql .= ")";
 }
 
+// Filter nach Rolle
 if ($rolleFilter === 'kunde' || $rolleFilter === 'admin') {
     $sql .= " AND rolle = :rolle";
     $params[':rolle'] = $rolleFilter;
@@ -35,12 +43,14 @@ $nutzerListe = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin-Dashboard</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Admin-Dashboard</h1>
 
+  <!-- Such- und Filterformular -->
   <form method="GET" action="admin_dashboard.php">
     <input type="text" name="suche" placeholder="Suche nach E-Mail, Name, ID..." value="<?= htmlspecialchars($suche) ?>">
     <select name="rolle">
@@ -51,10 +61,12 @@ $nutzerListe = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <button type="submit">Suchen</button>
   </form>
 
-  <form action="benutzer_bearbeiten.php" method="GET">
-    <button type="submit">+ Benutzer hinzufügen</button>
+  <!-- Admin hinzufügen Button -->
+  <form action="add_admin.php" method="GET">
+    <button type="submit">Admin hinzufügen</button>
   </form>
 
+  <!-- Ergebnisliste -->
   <table>
     <thead>
       <tr>
@@ -68,19 +80,23 @@ $nutzerListe = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($nutzerListe as $nutzer): ?>
-        <tr>
-          <td><?= htmlspecialchars($nutzer['id']) ?></td>
-          <td><?= htmlspecialchars($nutzer['vorname']) ?></td>
-          <td><?= htmlspecialchars($nutzer['nachname']) ?></td>
-          <td><?= htmlspecialchars($nutzer['email']) ?></td>
-          <td><?= htmlspecialchars($nutzer['rolle']) ?></td>
-          <td><?= $nutzer['offene_rechnungen'] ? 'Ja' : 'Nein' ?></td>
-          <td>
-            <a href="benutzer_bearbeiten.php?id=<?= $nutzer['id'] ?>">Bearbeiten</a>
-          </td>
-        </tr>
-      <?php endforeach; ?>
+      <?php if (!empty($nutzerListe)): ?>
+        <?php foreach ($nutzerListe as $nutzer): ?>
+          <tr>
+            <td><?= htmlspecialchars($nutzer['id']) ?></td>
+            <td><?= htmlspecialchars($nutzer['vorname']) ?></td>
+            <td><?= htmlspecialchars($nutzer['nachname']) ?></td>
+            <td><?= htmlspecialchars($nutzer['email']) ?></td>
+            <td><?= htmlspecialchars($nutzer['rolle']) ?></td>
+            <td><?= $nutzer['offene_rechnungen'] ? 'Ja' : 'Nein' ?></td>
+            <td>
+              <a href="benutzer_bearbeiten.php?id=<?= $nutzer['id'] ?>">Bearbeiten</a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <tr><td colspan="7">Keine Nutzer gefunden.</td></tr>
+      <?php endif; ?>
     </tbody>
   </table>
 </body>

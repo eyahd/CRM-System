@@ -10,7 +10,7 @@ $pdo = Database::getInstance()->getConnection();
 $id = $_SESSION['user_id'];
 
 // Aktuelle Kundendaten abrufen
-$stmt = $pdo->prepare("SELECT vorname, nachname, email, telefon, strasse, plz, ort, land FROM kunden WHERE id = :id");
+$stmt = $pdo->prepare("SELECT vorname, nachname, email, telefon, strasse, plz, ort, land, iban, bic FROM kunden WHERE id = :id");
 $stmt->execute([':id' => $id]);
 $kunde = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -43,19 +43,26 @@ if (!$kunde) {
       <input type="email" id="email" name="email" value="<?= htmlspecialchars($kunde['email']) ?>" required />
 
       <label for="telefon">Telefon:</label>
-      <input type="text" id="telefon" name="telefon" value="<?= htmlspecialchars($kunde['telefon']) ?>" />
+      <input type="text" id="telefon" name="telefon" required value="<?= htmlspecialchars($kunde['telefon']) ?>" />
 
       <label for="strasse">Straße:</label>
-      <input type="text" id="strasse" name="strasse" value="<?= htmlspecialchars($kunde['strasse']) ?>" />
+      <input type="text" id="strasse" name="strasse" required value="<?= htmlspecialchars($kunde['strasse']) ?>" />
 
       <label for="plz">PLZ:</label>
-      <input type="text" id="plz" name="plz" value="<?= htmlspecialchars($kunde['plz']) ?>" />
+      <input type="text" id="plz" name="plz" required value="<?= htmlspecialchars($kunde['plz']) ?>" />
 
       <label for="ort">Ort:</label>
-      <input type="text" id="ort" name="ort" value="<?= htmlspecialchars($kunde['ort']) ?>" />
+      <input type="text" id="ort" name="ort" required value="<?= htmlspecialchars($kunde['ort']) ?>" />
 
       <label for="land">Land:</label>
-      <input type="text" id="land" name="land" value="<?= htmlspecialchars($kunde['land']) ?>" />
+      <input type="text" id="land" name="land" required value="<?= htmlspecialchars($kunde['land']) ?>" />
+
+      <label for="iban">IBAN:</label>
+      <input type="text" id="iban" name="iban" required value="<?= htmlspecialchars($kunde['iban']) ?>" />
+      <small id="iban-fehler" class="fehlertext"></small>
+
+      <label for="bic">BIC:</label>
+      <input type="text" id="bic" name="bic" required value="<?= htmlspecialchars($kunde['bic']) ?>" />
 
       <button type="submit">Daten speichern</button>
     </fieldset>
@@ -82,6 +89,7 @@ if (!$kunde) {
       type="password"
       id="neues_passwort"
       name="neues_passwort"
+      minlength="8"
       required />
 
     <label for="neues_passwort2">Neues Passwort wiederholen:</label>
@@ -89,6 +97,7 @@ if (!$kunde) {
       type="password"
       id="neues_passwort2"
       name="neues_passwort2"
+      minlength="8"
       required />
 
     <button type="submit">Passwort ändern</button>
@@ -102,6 +111,8 @@ if (!$kunde) {
 <form action="logout.php" method="POST">
   <button type="submit">Abmelden</button>
 </form>
+<script src="js/iban.js"></script>
+<script src="js/script.js"></script>
 </body>
 
 </html>

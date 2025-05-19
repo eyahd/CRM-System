@@ -33,6 +33,10 @@ function sendeEmail(string $typ, string $empfaenger_email, string $empfaenger_na
             $template = __DIR__ . '/mails/konto_geloescht.html';
             $subject = 'Konto gelöscht';
             break;
+        case 'admin_hinzufuegen':
+            $template = __DIR__ . '/mails/admin_hinzufuegen.html';
+            $subject = 'Admin erstellen';
+            break;
         default:
             throw new Exception(message: "Unbekannter E-Mail-Typ: $typ");
     }
@@ -52,6 +56,8 @@ function sendeEmail(string $typ, string $empfaenger_email, string $empfaenger_na
         $mail->SMTPAuth = $config['smtp_auth'];
         $mail->Username = $config['username'];
         $mail->Password = $config['password'];
+        $mail->CharSet = $config['charset'];
+        $mail->Encoding = $config['encoding'];
         $mail->setFrom(address: $config['from_email'], name: $config['from_name']);
         $mail->addAddress(address: $empfaenger_email, name: $empfaenger_name);
         $mail->isHTML(isHtml: true);

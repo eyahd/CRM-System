@@ -2,24 +2,46 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Willkommen!</title>
+    <title>Willkommen bei unserem KFZ-Verleih!</title>
+    <style>
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 20px !important;
+            }
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
-    <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
-        <h2 style="color: #333333;">Willkommen bei unserem KFZ Verleih, {{vorname}}!</h2>
-        <p style="font-size: 16px; color: #555555;">
-            Schön, dass Sie sich bei uns registriert haben. Ihre E-Mail-Adresse wurde erfolgreich bestätigt.
+<body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+
+    <div class="container" style="max-width: 600px; margin: 40px auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <h2 style="color: #1a1a1a; font-size: 24px; margin-top: 0;">Herzlich willkommen, {{vorname}}!</h2>
+
+        <p style="font-size: 16px; color: #444444; line-height: 1.6;">
+            Vielen Dank für Ihre Registrierung bei unserem KFZ-Verleih. Ihre E-Mail-Adresse wurde erfolgreich bestätigt.
         </p>
-        <p style="font-size: 16px; color: #555555;">
-            Ab sofort können Sie alle Funktionen Ihres Kontos uneingeschränkt nutzen. Wir freuen uns, Sie als Teil unserer Community begrüßen zu dürfen!
+
+        <p style="font-size: 16px; color: #444444; line-height: 1.6;">
+            Ab sofort haben Sie vollen Zugriff auf Ihr Kundenkonto und alle unsere Services. Wir freuen uns, Sie bei uns begrüßen zu dürfen!
         </p>
-        <p style="font-size: 16px; color: #555555;">
-            Bei Fragen oder Problemen steht Ihnen unser Support jederzeit gerne zur Verfügung.
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="http://localhost/CRM-Workspace/login.html" 
+               style="background-color: #007bff; color: #ffffff; padding: 14px 24px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">
+                Jetzt einloggen
+            </a>
+        </div>
+
+        <p style="font-size: 16px; color: #444444; line-height: 1.6;">
+            Bei Fragen oder Problemen steht Ihnen unser Kundenservice jederzeit gerne zur Verfügung.
         </p>
-        <p style="font-size: 16px; color: #555555;">
+
+        <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;">
+
+        <p style="font-size: 16px; color: #444444; line-height: 1.6;">
             Mit freundlichen Grüßen,<br>
-            Ihr Kundenservice
+            <strong>Ihr Team vom KFZ-Verleih</strong>
         </p>
     </div>
+
 </body>
 </html>

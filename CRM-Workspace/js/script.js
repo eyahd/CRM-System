@@ -55,12 +55,6 @@ function checkPasswortGleichheit(event) {
   const pw1 = document.getElementById("passwort")?.value || "";
   const pw2 = document.getElementById("passwort2")?.value || "";
 
-  if (pw1.length < 8) {
-    alert("Das Passwort muss mindestens 8 Zeichen lang sein.");
-    event.preventDefault();
-    return false;
-  }
-
   if (pw1 !== pw2) {
     alert("Die Passwörter stimmen nicht überein.");
     event.preventDefault();
@@ -77,12 +71,12 @@ window.addEventListener("DOMContentLoaded", () => {
   if (rolleElement) {
     const rolle = rolleElement.value;
     toggleKundentyp(rolle);
-    toggleKundenfelder(rolle); // ✅ Korrekte Übergabe des Rollenwerts
+    toggleKundenfelder(rolle); //  Korrekte Übergabe des Rollenwerts
 
     rolleElement.addEventListener("change", (e) => {
       const neueRolle = e.target.value;
       toggleKundentyp(neueRolle);
-      toggleKundenfelder(neueRolle); // ✅ beim Wechsel auch neu setzen
+      toggleKundenfelder(neueRolle); //  beim Wechsel auch neu setzen
     });
   }
 
@@ -91,7 +85,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
   const pw1 = document.getElementById("passwort");
   const pw2 = document.getElementById("passwort2");
-
+  // Überprüfen, ob die Elemente existieren, bevor das Event hinzugefügt wird zB. admin_dashbord verwendet kein Passwort
   if (form && pw1 && pw2) {
     form.addEventListener("submit", checkPasswortGleichheit);
   }

@@ -11,7 +11,7 @@ $pdo = Database::getInstance()->getConnection();
 $id = $_SESSION['user_id'];
 
 // Alte Daten abrufen
-$stmt = $pdo->prepare("SELECT vorname, nachname, email, telefon, strasse, plz, ort, land FROM kunden WHERE id = :id");
+$stmt = $pdo->prepare("SELECT vorname, nachname, email, telefon, strasse, plz, ort, land, iban, bic FROM kunden WHERE id = :id");
 $stmt->execute([':id' => $id]);
 $alt = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -24,7 +24,9 @@ $neu = [
     'strasse' => $_POST['strasse'] ?? '',
     'plz' => $_POST['plz'] ?? '',
     'ort' => $_POST['ort'] ?? '',
-    'land' => $_POST['land'] ?? ''
+    'land' => $_POST['land'] ?? '',
+    'iban' => $_POST['iban'] ?? '',
+    'bic' => $_POST['bic'] ?? ''
 ];
 
 // Änderungen vergleichen
@@ -45,6 +47,8 @@ $sql = "UPDATE kunden SET
     plz = :plz,
     ort = :ort,
     land = :land
+    iban = :iban,
+    bic = :bic  
 WHERE id = :id";
 
 

@@ -1,0 +1,2 @@
+2025-05-13 11:17:18 - Fehler: E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.
+2025-05-13 11:19:00 - Fehler: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'peter@pan.de' for key 'email'

@@ -1,5 +1,6 @@
 <?php
 require_once 'db_config.php'; // Datenbankkonfiguration einfügen
+require_once 'utils.php';
 $pdo = Database::getInstance()->getConnection(); // Datenbankverbindung herstellen
 
 // Formularwerte auslesen & vorbereiten
@@ -26,12 +27,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Passwörter vergleichen und auf mindestens 8 Zeichen prüfen im Backend
-if (strlen($passwort) < 8) {
-    die("Fehler: Das Passwort muss mindestens 8 Zeichen lang sein.");
-}
-if ($passwort !== $passwort2) {
-    die("Fehler: Die Passwörter stimmen nicht überein.");
-}
+validierePasswoerter($passwort, $passwort2);
 
 // Passwort sicher hashen 
 $passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);

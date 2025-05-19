@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin-Konto erstellt</title>
+  <style>
+    body { font-family: Arial, sans-serif; color: #333; }
+    .content { padding: 20px; background-color: #f9f9f9; border-radius: 8px; }
+    .footer { margin-top: 20px; font-size: 0.9em; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h2>Willkommen, {{vorname}} {{nachname}}!</h2>
+    <p>Ihr Admin-Konto wurde erfolgreich eingerichtet.</p>
+    <p>Sie können sich ab sofort mit Ihrer E-Mail-Adresse <strong>{{email}}</strong> anmelden.</p>
+    
+    <p>Ihr Passwort lautet: <strong>{{passwort}}</strong></p>
+
+    <p>Zum Login gelangen Sie über folgenden Link:</p>
+    <p><a href="{{login_link}}">{{login_link}}</a></p>
+
+    <p>Bei Fragen stehen wir Ihnen gerne zur Verfügung.</p>
+    <p>Viele Grüße,<br>Ihr Admin-Team</p>
+  </div>
+
+  <div class="footer">
+    Diese E-Mail wurde automatisch generiert. Bitte antworten Sie nicht darauf.
+  </div>
+</body>
+</html>

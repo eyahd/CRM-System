@@ -2,6 +2,7 @@
 // link zum Zurücksetzen des Passworts in der E-Mail
 require_once 'db_config.php';
 require_once 'mailer.php';
+require_once 'utils.php';
 $pdo = Database::getInstance()->getConnection();
 
 $token = $_GET['token'] ?? '';
@@ -19,9 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pw = $_POST['passwort'] ?? '';
     $pw2 = $_POST['passwort2'] ?? '';
 
-    if ($pw !== $pw2 || strlen($pw) < 8) {
-        die("Passwörter stimmen nicht überein oder sind zu kurz.");
-    }
+    validierePasswoerter($pw, $pw2);
 
     // Passwort aktualisieren
     $hash = password_hash($pw, PASSWORD_DEFAULT);
@@ -53,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form method="POST">
     <p>Bitte geben Sie Ihr neues Passwort ein.</p>
     <label>Neues Passwort:</label>
-    <input type="password" name="passwort" required>
+    <input type="password" name="passwort" minlength="8" required>
     <label>Passwort wiederholen:</label>
-    <input type="password" name="passwort2" required>
+    <input type="password" name="passwort2" minlength="8" required>
     <button type="submit">Passwort speichern</button>
 </form>

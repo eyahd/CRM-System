@@ -2,6 +2,7 @@
 session_start();
 require_once 'db_config.php';
 require_once 'mailer.php';
+require_once 'utils.php';
 
 if (!isset($_SESSION['user_id'])) {
     die("Nicht angemeldet.");
@@ -14,19 +15,13 @@ $altesPasswort = $_POST['altes_passwort'] ?? '';
 $neuesPasswort = $_POST['neues_passwort'] ?? '';
 $neuesPasswort2 = $_POST['neues_passwort2'] ?? '';
 
-// Validierung
+// 2te Validierung
 if (empty($altesPasswort) || empty($neuesPasswort) || empty($neuesPasswort2)) {
     die("Bitte alle Felder ausfüllen.");
 }
 
-if ($neuesPasswort !== $neuesPasswort2) {
-    die("Die neuen Passwörter stimmen nicht überein.");
-}
-
-if (strlen($neuesPasswort) < 8) {
-    die("Das neue Passwort muss mindestens 8 Zeichen lang sein.");
-}
-
+validierePasswoerter($neuesPasswort, $neuesPasswort2);
+    
 // Altes Passwort prüfen
 $sql = "SELECT vorname, email, passwort_hash FROM kunden WHERE id = :id";
 $stmt = $pdo->prepare($sql);
