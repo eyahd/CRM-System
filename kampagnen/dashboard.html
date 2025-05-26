@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      color: #333;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #2c3e50;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      color: white;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 600;
+      color: #f1c40f;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: white;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: #34495e;
+    }
+
+    .main {
+      flex: 1;
+      padding: 3rem;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .main h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    .main p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      color: #444;
+    }
+
+    .main .btns {
+      margin-top: 2rem;
+    }
+
+    .main .btns a {
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      background-color: #2980b9;
+      color: white;
+      border-radius: 8px;
+      margin: 0 0.5rem;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .main .btns a:hover {
+      background-color: #3498db;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="main">
+    <h1>Welcome Back, Team!</h1>
+    <p>
+      Manage your marketing campaigns with ease. From personalized offers to seasonal promotions—plan, launch, and review it all from one place.
+    </p>
+    <div class="btns">
+      <a href="create.html">Create New Campaign</a>
+     <a href="track.php">See Existing Campaigns</a>
+
+    </div>
+  </div>
+</body>
+</html>

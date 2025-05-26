@@ -1,0 +1,177 @@
+/* Grundlegendes Design */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa; /* Sehr helles Grau für einen eleganten Hintergrund */
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sanfte Schatten für einen eleganten Look */
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #3a4e6d; /* Sanftes, elegantes Blau */
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+header p {
+  font-size: 1rem;
+  color: #7f8c8d; /* Kühles Grau für den Text */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Filter */
+.filters form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.filter-item label {
+  font-size: 1rem;
+  color: #3a4e6d; /* Elegantes Blau für Labels */
+}
+
+.filter-item select,
+.filter-item input {
+  padding: 8px 15px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 180px;
+  background-color: #fafafa; /* Sehr helles Grau für Eingabefelder */
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  background-color: #4a6d84; /* Sanftes Blau für Buttons */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3a5366; /* Etwas dunkleres Blau für den Hover-Effekt */
+}
+
+/* Kampagnentabelle */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+table th,
+table td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #e1e4e8; /* Dezentes Grau für die Ränder */
+}
+
+table th {
+  background-color: #f7f9fa; /* Sehr helles Blau für den Header */
+  color: #3a4e6d; /* Elegantes Blau für die Header */
+}
+
+table td {
+  background-color: #ffffff;
+  color: #495057;
+}
+
+/* Statusfarben */
+.status {
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.status.active {
+  background-color: #30cf77; /* Elegantes Grün für "Aktiv" */
+  color: white;
+}
+
+.status.planned {
+  background-color: #17aad2; /* Sanftes, gedämpftes Gelb für "Geplant" */
+  color: white;
+}
+
+.status.expired {
+  background-color: #e80e3a; /* Sanftes Rot für "Abgelaufen" */
+  color: white;
+}
+
+/* Aktions-Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background-color: #4a6d84; /* Sanftes Blau für Buttons */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.btn:hover {
+  background-color: #3a5366; /* Dunkleres Blau beim Hover */
+}
+
+.delete {
+  background-color: #e74c3c; /* Dezentes Rot für Löschen */
+}
+
+.delete:hover {
+  background-color: #c0392b; /* Dunkleres Rot beim Hover */
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  background-color: #4a6d84; /* Sanftes Blau für Buttons */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin: 0 5px;
+}
+
+.pagination button:hover {
+  background-color: #3a5366; /* Dunkleres Blau beim Hover */
+}
+
+.pagination span {
+  font-size: 1rem;
+  color: #495057;
+  margin: 0 10px;
+}

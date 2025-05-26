@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neue Kampagne erstellen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #e3e6e9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+     background-image: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    .container {
+      max-width: 850px;
+      margin: 60px auto;
+      background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for form */
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+    h1 {
+      text-align: center;
+      color: #5cc0e7;
+      margin-bottom: 40px;
+      font-size: 2rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 500;
+      color: #34495e;
+    }
+    input[type="text"], input[type="date"], textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbcecf;
+      border-radius: 12px;
+      margin-top: 8px;
+      font-size: 1rem;
+      background-color: #ffffff;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
+      border-color: #6c5ce7;
+    }
+    .zielgruppen-options {
+      margin-top: 10px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .zielgruppen-options input {
+      width: auto;
+    }
+    .hidden {
+      display: none;
+    }
+    .button {
+      background-color: #f27121;
+      color: #fff;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      margin-top: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+    .button:hover {
+      background-color: #4834d4;
+      transform: scale(1.05);
+    }
+    .subsection {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f9f9ff;
+      border: 1px solid #dcdde1;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Cute icons or images around the form */
+    .icon1, .icon2, .icon3 {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .icon1 {
+      top: 10px;
+      left: 10px;
+      background-image: url('https://sl.bing.net/fyI1MU8gQZU'); /* Replace with your cute icon */
+    }
+    .icon2 {
+      bottom: 20px;
+      right: 30px;
+      background-image: url('https://sl.bing.net/fyI1MU8gQZU');
+    }
+    .icon3 {
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      background-image: url('https://sl.bing.net/fyI1MU8gQZU');
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Neue Kampagne erstellen</h1>
+   <form action="save_campaign.php" method="POST">
+
+    <!-- Inside your form -->
+<label for="kampagnentyp">Kampagnentyp</label>
+<select name="kampagnentyp" id="kampagnentyp" required onchange="handleKampagnentypChange()">
+  <option value="">Bitte auswählen</option>
+  <option value="seasonal">Saisonal</option>
+  <option value="birthday">Geburtstag</option>
+  <option value="high_spenders">Top-Kunden</option>
+  <option value="new_customers">Neukunden</option>
+  <option value="reactivation">Reaktivierung</option>
+  <option value="custom">Benutzerdefiniert</option>
+</select>
+
+<!-- Seasonal dropdown shown only if 'seasonal' is selected -->
+<div id="seasonal_subtypes" class="subsection hidden">
+  <label for="season_select">Jahreszeit wählen:</label>
+  <select id="season_select" name="season_select" onchange="setSeasonalMessage()">
+    <option value="">Bitte wählen</option>
+    <option value="spring">Frühling</option>
+    <option value="summer">Sommer</option>
+    <option value="autumn">Herbst</option>
+    <option value="winter">Winter</option>
+  </select>
+</div>
+
+
+
+<label for="description">Beschreibung</label>
+<textarea id="description" name="beschreibung" rows="4" required></textarea>
+
+
+
+
+      <label>Zielgruppe wählen:</label>
+      <div class="zielgruppen-options">
+        <input type="radio" id="gruppe" name="zielgruppe_typ" value="gruppe" checked onclick="toggleZielgruppe('gruppe')">
+        <label for="gruppe">Gruppe</label>
+        <input type="radio" id="individuell" name="zielgruppe_typ" value="individuell" onclick="toggleZielgruppe('individuell')">
+        <label for="individuell">Individuell</label>
+      </div>
+
+      <div id="gruppe_fields" class="subsection">
+        <label for="kategorie">Kundengruppe</label>
+        <select id="kategorie" name="kategorie">
+          <option value="tier_a">Tier A Kunden</option>
+          <option value="tier_b">Tier B Kunden</option>
+          <option value="tier_c">Tier C Kunden</option>
+        </select>
+      </div>
+
+      <div id="individuell_fields" class="subsection hidden">
+        <label for="kunden_id">Kunden-ID</label>
+        <input type="text" id="kunden_id" name="kunden_id">
+
+        <label for="email">E-Mail Adresse</label>
+        <input type="text" id="email" name="email">
+      </div>
+
+
+      <label for="startdatum">Startdatum</label>
+      <input type="date" id="startdatum" name="startdatum" required>
+
+      <label for="enddatum">Enddatum</label>
+      <input type="date" id="enddatum" name="enddatum" required>
+
+      <label for="nachricht">Nachricht</label>
+      <textarea id="nachricht" name="nachricht" rows="4" required></textarea>
+
+<input type="hidden" name="action" id="formAction" value="save_only">
+
+<button type="submit" class="button" onclick="setFormAction('save_only')">Kampagne senden</button>
+
+    </form>
+
+<script>
+function toggleZielgruppe(type) {
+  document.getElementById("gruppe_fields").classList.toggle("hidden", type !== 'gruppe');
+  document.getElementById("individuell_fields").classList.toggle("hidden", type !== 'individuell');
+}
+
+document.querySelector("form").addEventListener("submit", function (e) {
+  const start = new Date(document.getElementById("startdatum").value);
+  const end = new Date(document.getElementById("enddatum").value);
+  if (start > end) {
+    alert("Enddatum darf nicht vor dem Startdatum liegen.");
+    e.preventDefault();
+  }
+});
+
+function handleKampagnentypChange() {
+  const kampagnentyp = document.getElementById("kampagnentyp").value;
+  const seasonalSubtypes = document.getElementById("seasonal_subtypes");
+  const nachricht = document.getElementById("nachricht");
+
+  // Hide seasonal selector by default
+  seasonalSubtypes.classList.add("hidden");
+  document.getElementById("season_select").value = "";
+
+  switch (kampagnentyp) {
+    case "birthday":
+      nachricht.value = "Alles Gute zum Geburtstag! 🎉 Wir haben ein spezielles Angebot für Sie!";
+      break;
+    case "high_spenders":
+      nachricht.value = "Vielen Dank für Ihre Treue! Als Top-Kunde erhalten Sie exklusive Vorteile.";
+      break;
+    case "new_customers":
+      nachricht.value = "Willkommen bei uns! 🎉 Wir freuen uns, Sie als neuen Kunden begrüßen zu dürfen.";
+      break;
+    case "reactivation":
+      nachricht.value = "Wir vermissen Sie! Kommen Sie zurück und sichern Sie sich ein spezielles Angebot.";
+      break;
+    case "custom":
+      nachricht.value = "";
+      break;
+    case "seasonal":
+      seasonalSubtypes.classList.remove("hidden");
+      nachricht.value = ""; // Wait for seasonal subtype to be selected
+      break;
+    default:
+      nachricht.value = "";
+  }
+}
+
+function setSeasonalMessage() {
+  const season = document.getElementById("season_select").value;
+  const nachricht = document.getElementById("nachricht");
+
+  const messages = {
+    spring: "Fröhlichen Frühling! 🌸 Entdecken Sie unsere neuen Frühlingsangebote.",
+    summer: "Sonnige Grüße! ☀️ Sichern Sie sich coole Sommerdeals.",
+    autumn: "Herbstliche Highlights 🍁 – Jetzt tolle Rabatte entdecken.",
+    winter: "Winterwunderland ❄️ – Unsere besten Angebote für kalte Tage."
+  };
+
+  nachricht.value = messages[season] || "";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  handleKampagnentypChange(); // in case it's pre-selected
+});
+</script>
+
+
+</body>
+</html>
