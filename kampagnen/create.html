@@ -204,6 +204,16 @@ document.querySelector("form").addEventListener("submit", function (e) {
   if (start > end) {
     alert("Enddatum darf nicht vor dem Startdatum liegen.");
     e.preventDefault();
+    return;
+  }
+
+  const zielgruppeTyp = document.querySelector('input[name="zielgruppe_typ"]:checked').value;
+  const emailField = document.getElementById("email").value.trim();
+
+  if (zielgruppeTyp === "individuell" && emailField === "") {
+    alert("Bitte geben Sie eine E-Mail-Adresse an, wenn 'Individuell' gewählt wurde.");
+    e.preventDefault();
+  
   }
 });
 
