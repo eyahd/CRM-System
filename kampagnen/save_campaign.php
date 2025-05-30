@@ -10,7 +10,7 @@ $kampagnentyp = $_POST['kampagnentyp'];
 $beschreibung = $_POST['beschreibung'];
 $zielgruppe_typ = $_POST['zielgruppe_typ'];
 $kategorie = isset($_POST['kategorie']) ? $_POST['kategorie'] : null;
-$kunden_id = !empty($_POST['kunden_id']) ? $_POST['kunden_id'] : null;
+$kunden_id = isset($_POST['kunden_id']) ? (int)$_POST['kunden_id'] : null;
 $email = $_POST['email'] ?? null;
 $startdatum = $_POST['startdatum'];
 $enddatum = $_POST['enddatum'];
@@ -28,7 +28,7 @@ if (strtotime($startdatum) > strtotime($enddatum)) {
 
 // 1. Save campaign
 $stmt = $conn->prepare("INSERT INTO kampagnen (kampagnentyp, beschreibung, zielgruppe_typ, kategorie, kunden_id, email, startdatum, enddatum, nachricht) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssssss", $kampagnentyp, $beschreibung, $zielgruppe_typ, $kategorie, $kunden_id, $email, $startdatum, $enddatum, $nachricht);
+$stmt->bind_param("ssssissss", $kampagnentyp, $beschreibung, $zielgruppe_typ, $kategorie, $kunden_id, $email, $startdatum, $enddatum, $nachricht);
 $stmt->execute();
 $stmt->close();
 
