@@ -17,8 +17,8 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f3f3f3;
-  color: #333;
+  background-color: #111;
+  color: #fff;
   padding: 40px 20px;
   line-height: 1.6;
 }
@@ -27,10 +27,11 @@ body {
 form {
   max-width: 700px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: #1a1a1a;
+  color:#fff;
   padding: 30px 40px;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(255, 95, 0, 0.3);
 }
 
 /* === Überschriften === */
@@ -74,7 +75,7 @@ select {
 
 input:focus,
 select:focus {
-  border-color: #0066cc;
+  border-color: #ff5f00;
   outline: none;
 }
 
@@ -89,8 +90,8 @@ select:focus {
 button {
   display: block;
   width: 100%;
-  background-color: #0066cc;
-  color: white;
+  background-color: #ff5f00;
+  color: black;
   padding: 14px;
   border: none;
   border-radius: 8px;
@@ -101,7 +102,8 @@ button {
 }
 
 button:hover {
-  background-color: #004d99;
+  background-color: #e65a00;
+  color: white;
 }
 
 /* === Responsive Optimierung === */
@@ -120,11 +122,12 @@ button:hover {
 }
 
 .container {
-  background: white;
+  background-color:#1a1a1a;
+  color: #fff;
   padding: 40px;
   text-align: center;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(255, 95, 0, 0.3);
 }
 
 .button-group {
@@ -135,15 +138,16 @@ button:hover {
   display: inline-block;
   margin: 0 10px;
   padding: 12px 24px;
-  background-color: #0066cc;
-  color: white;
+  background-color: #ff5f00;
+  color: black;
   text-decoration: none;
   border-radius: 6px;
   transition: background-color 0.3s;
 }
 
 .button:hover {
-  background-color: #004d99;
+  background-color: #e65a00;
+  color:white;
 }
 
 
