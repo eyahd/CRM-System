@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <title>Benutzer bearbeiten</title>
@@ -79,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <h2>Benutzer bearbeiten</h2>
-    <form method="POST">
+    <form method="POST" class="edit-user-form">
         <label>Vorname:</label>
         <input type="text" name="vorname" value="<?= htmlspecialchars($benutzer['vorname']) ?>" required><br>
 
@@ -105,28 +106,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>Land:</label>
             <input type="text" name="land" value="<?= htmlspecialchars($benutzer['land']) ?>"><br>
 
-            <fieldset id="firmenfelder" style="display: none;">
-                <legend>Firmendaten</legend>
+            <fieldset id="firmenfelder">
                 <label for="firmenname">Firmenname</label>
                 <input type="text" name="firmenname" id="firmenname"
-                       value="<?= htmlspecialchars($benutzer['firmenname'] ?? '') ?>" />
+                    value="<?= htmlspecialchars($benutzer['firmenname'] ?? '') ?>" />
                 <label for="ust_id">USt-ID</label>
                 <input type="text" name="ust_id" id="ust_id"
-                       value="<?= htmlspecialchars($benutzer['ust_id'] ?? '') ?>" />
+                    value="<?= htmlspecialchars($benutzer['ust_id'] ?? '') ?>" />
             </fieldset>
 
             <label for="iban">IBAN:</label>
             <input type="text" id="iban" name="iban" placeholder="DE..." required
-                   value="<?= htmlspecialchars($benutzer['iban'] ?? '') ?>" />
+                value="<?= htmlspecialchars($benutzer['iban'] ?? '') ?>" />
             <small id="iban-fehler" class="fehlertext"></small>
 
             <label for="bic">BIC:</label>
             <input type="text" name="bic" id="bic" required
-                   value="<?= htmlspecialchars($benutzer['bic'] ?? '') ?>" />
+                value="<?= htmlspecialchars($benutzer['bic'] ?? '') ?>" />
 
             <label for="bonitaet_score">Bonitätsscore (0–255)</label>
             <input type="number" name="bonitaet_score" id="bonitaet_score" min="0" max="255" required
-                   value="<?= htmlspecialchars($benutzer['bonitaet_score'] ?? 0) ?>" />
+                value="<?= htmlspecialchars($benutzer['bonitaet_score'] ?? 0) ?>" />
+
+            <label>Offene Rechnungen:</label>
+            <input type="checkbox" name="offene_rechnungen" <?= $benutzer['offene_rechnungen'] ? 'checked' : '' ?>><br>
         </div>
 
         <label>Rolle:</label>
@@ -142,14 +145,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="geschaeft" <?= $benutzer['typ'] === 'geschaeft' ? 'selected' : '' ?>>Geschäftskunde</option>
             </select><br>
         </div>
-
-        <label>Offene Rechnungen:</label>
-        <input type="checkbox" name="offene_rechnungen" <?= $benutzer['offene_rechnungen'] ? 'checked' : '' ?>><br>
-
         <button type="submit">Speichern</button>
     </form>
 
     <script src="js/iban.js"></script>
     <script src="js/script.js"></script>
 </body>
+
 </html>

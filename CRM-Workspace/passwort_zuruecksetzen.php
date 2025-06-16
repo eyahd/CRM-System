@@ -20,7 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pw = $_POST['passwort'] ?? '';
     $pw2 = $_POST['passwort2'] ?? '';
 
-    validierePasswoerter($pw, $pw2);
+    $fehler = validierePasswoerter(pw1: $pw, pw2: $pw2);
+
+    if ($fehler !== null) {
+        // Fehler gefunden – dem Nutzer anzeigen und Skript beenden
+        echo '<p style="color:red;">' . htmlspecialchars($fehler) . '</p>';
+        exit;
+    }
 
     // Passwort aktualisieren
     $hash = password_hash($pw, PASSWORD_DEFAULT);
@@ -44,16 +50,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
-
+<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css" />
+    <title>Neues Passwort setzen</title>
+    <link rel="stylesheet" href="styles.css"/>
 </head>
-<form method="POST">
+<body>
+
+<form method="POST" id="passwort-formular">
     <p>Bitte geben Sie Ihr neues Passwort ein.</p>
-    <label>Neues Passwort:</label>
-    <input type="password" name="passwort" minlength="8" required>
-    <label>Passwort wiederholen:</label>
-    <input type="password" name="passwort2" minlength="8" required>
+
+    <label for="passwort">Neues Passwort:</label>
+    <input
+        type="password"
+        name="passwort"
+        id="passwort"
+        minlength="8"
+        required
+        aria-describedby="passwort-fehler" />
+
+    <label for="passwort2">Passwort wiederholen:</label>
+    <input
+        type="password"
+        name="passwort2"
+        id="passwort2"
+        minlength="8"
+        required
+        aria-describedby="passwort-fehler" />
+
+    <div id="passwort-fehler" class="fehler-text"></div>
+
     <button type="submit">Passwort speichern</button>
 </form>
+<script src="js/script.js"></script>
+</body>
+</html>

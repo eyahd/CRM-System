@@ -1,153 +1,211 @@
+/* =======================
+   Design Tokens & Variables
+   ======================= */
+:root {
+  /* Farbpalette */
+  --color-primary: #ff5f00;    /* Sixt-Orange */
+  --color-dark:    #111;       /* dunkler Hintergrund */
+  --color-light:   #fff;       /* Weiß für Text */
+  --color-muted:   #666;       /* dezenter Text */
 
+  /* Typografie */
+  --font-base:     'Arial', sans-serif;
+  --fs-h1:         2.5rem;
+  --fs-h2:         1.75rem;
+  --fs-body:       1rem;
 
-.invalid {
-  border: 2px solid red;
-  background-color: #ffe6e6;
+  /* Abstände */
+  --spacing-xs:    0.5rem;
+  --spacing-sm:    1rem;
+  --spacing-md:    1.5rem;
+  --spacing-lg:    2.5rem;
 }
-.fehlertext {
-  color: red;
-  font-size: 0.9em;
-}
-/* === Basis-Reset & Schrift === */
+
+/* =======================
+   Basis-Reset & Schrift
+   ======================= */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 body {
-  font-family: Arial, sans-serif;
-  background-color: #111;
-  color: #fff;
-  padding: 40px 20px;
+  font-family: var(--font-base);
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  padding: var(--spacing-lg) var(--spacing-md);
   line-height: 1.6;
 }
 
-/* === Formular-Container (zentriert & responsiv) === */
-form {
+/* =======================
+   Formular-Container & Auth-Section
+   ======================= */
+form,
+.auth-section,
+.container {
   max-width: 700px;
   margin: 0 auto;
   background-color: #1a1a1a;
-  color:#fff;
-  padding: 30px 40px;
+  padding: var(--spacing-lg) var(--spacing-md);
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 95, 0, 0.3);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 
-/* === Überschriften === */
-h2 {
+/* =======================
+   Überschriften
+   ======================= */
+h2, .hero h1, .container h1 {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 28px;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+}
+h2, .container h1 {
+  font-size: var(--fs-h2);
 }
 
-/* === Fieldsets & Legenden === */
-fieldset {
-  border: 1px solid #ccc;
+/* =======================
+   Fieldset & Legend
+   ======================= */
+.registration-form fieldset,
+.edit-user-form fieldset,
+.auth-form fieldset {
+  border: 1px solid #444;
   border-radius: 8px;
-  margin-bottom: 25px;
-  padding: 20px;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  background-color: #222;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-
-legend {
-  font-weight: bold;
-  padding: 0 10px;
+.registration-form legend,
+.edit-user-form legend,
+.auth-form legend {
+  font-weight: 700;
   font-size: 1.1em;
+  padding: 0 var(--spacing-xs);
+  color: var(--color-primary);
 }
 
-/* === Labels & Eingabefelder === */
+/* =======================
+   Labels & Eingabefelder
+   ======================= */
 label {
   display: block;
-  margin-top: 15px;
-  font-weight: bold;
+  margin-top: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--color-light);
 }
-
 input,
-select {
+select,
+textarea {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #bbb;
+  padding: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+  border: 1px solid var(--color-muted);
   border-radius: 6px;
-  font-size: 1em;
-  transition: border 0.2s ease;
+  background-color: #111;
+  color: var(--color-light);
+  font-size: var(--fs-body);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-muted);
+}
 input:focus,
-select:focus {
-  border-color: #ff5f00;
+select:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 8px rgba(255,95,0,0.4);
   outline: none;
 }
 
-/* === Hinweistext / Fehlertext === */
+/* =======================
+   Fehler- und Validierungsstyles
+   ======================= */
+input.invalid,
+select.invalid,
+textarea.invalid {
+  border: 2px solid #e74c3c;
+  background-color: #fdecea;
+}
+.fehler-text,
 .fehlertext {
-  color: red;
-  font-size: 0.9em;
-  margin-top: 5px;
+  color: #e74c3c;
+  font-size: 0.85em;
+  margin-top: var(--spacing-xs);
+  display: none;
 }
 
-/* === Button Styling === */
-button {
+/* =======================
+   Button Styling
+   ======================= */
+button,
+.auth-form button {
   display: block;
-  width: 100%;
-  background-color: #ff5f00;
-  color: black;
-  padding: 14px;
+  width: auto;
+  max-width: 260px;
+  margin: var(--spacing-md) auto 0 auto;
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+  padding: var(--spacing-sm) var(--spacing-lg);
   border: none;
   border-radius: 8px;
   font-size: 1em;
+  font-weight: 700;
   cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255,95,0,0.4);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-button:hover {
+button:hover,
+.auth-form button:hover {
   background-color: #e65a00;
-  color: white;
+  color: var(--color-light);
+  box-shadow: 0 6px 12px rgba(230,90,0,0.6);
 }
 
-/* === Responsive Optimierung === */
-@media (max-width: 768px) {
-  body {
-    padding: 20px 10px;
-  }
-
-  form {
-    padding: 20px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-}
-
-.container {
-  background-color:#1a1a1a;
-  color: #fff;
-  padding: 40px;
-  text-align: center;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 95, 0, 0.3);
-}
-
-.button-group {
-  margin-top: 20px;
-}
-
-.button {
+.button,
+.button-group .button {
   display: inline-block;
-  margin: 0 10px;
-  padding: 12px 24px;
-  background-color: #ff5f00;
-  color: black;
+  width: auto;
+  margin: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: var(--color-dark);
   text-decoration: none;
   border-radius: 6px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
-
-.button:hover {
+.button:hover,
+.button-group .button:hover {
   background-color: #e65a00;
-  color:white;
+  color: var(--color-light);
 }
 
+/* =======================
+   Responsive Optimierung
+   ======================= */
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-md);
+  }
+  form,
+  .auth-section,
+  .container {
+    padding: var(--spacing-md);
+  }
+  h2,
+  .container h1 {
+    font-size: 1.4rem;
+  }
+}
 
+/* =======================
+   Footer
+   ======================= */
+.site-footer {
+  text-align: center;
+  padding: var(--spacing-md) 0;
+  background: var(--color-dark);
+  color: var(--color-light);
+  margin-top: var(--spacing-lg);
+}

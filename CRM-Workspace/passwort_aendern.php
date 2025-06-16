@@ -12,16 +12,22 @@ $pdo = Database::getInstance()->getConnection();
 
 $kundeId = $_SESSION['user_id'];
 $altesPasswort = $_POST['altes_passwort'] ?? '';
-$neuesPasswort = $_POST['neues_passwort'] ?? '';
-$neuesPasswort2 = $_POST['neues_passwort2'] ?? '';
+$neuesPasswort = $_POST['passwort'] ?? '';
+$neuesPasswort2 = $_POST['passwort2'] ?? '';
 
 // 2te Validierung
 if (empty($altesPasswort) || empty($neuesPasswort) || empty($neuesPasswort2)) {
     die("Bitte alle Felder ausfüllen.");
 }
 
-validierePasswoerter($neuesPasswort, $neuesPasswort2);
-    
+$fehler = validierePasswoerter(pw1: $neuesPasswort, pw2: $neuesPasswort2);
+
+if ($fehler !== null) {
+    // Fehler gefunden – dem Nutzer anzeigen und Skript beenden
+    echo '<p style="color:red;">' . htmlspecialchars($fehler) . '</p>';
+    exit;
+}
+
 // Altes Passwort prüfen
 $sql = "SELECT vorname, email, passwort_hash FROM kunden WHERE id = :id";
 $stmt = $pdo->prepare($sql);
@@ -50,5 +56,6 @@ sendeEmail(
 );
 
 // Weiterleitung mit Erfolgsmeldung
-header("Location: kunden_dashboard.html?update=passwort_geaendert");
+header("Location: kunden_dashboard.html");
 exit;
+

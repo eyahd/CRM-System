@@ -46,5 +46,4 @@ sendeEmail(
     ]
 );
 
-
-echo "Ein Link zum Zurücksetzen wurde an die angegebende E-Mail gesendet.";
+echo "Ein Link zum Zurücksetzen wurde an die angegebene E-Mail gesendet.";

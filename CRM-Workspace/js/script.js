@@ -13,20 +13,20 @@ function toggleFirmenfelder() {
   ust_id.required = anzeigen;
 }
 
+// Zeigt oder versteckt Felder für Kunden
 function toggleKundenfelder(rolle) {
   const kundenbereiche = document.querySelectorAll(".kunde-feld");
   const anzeigen = rolle === "kunde";
 
   kundenbereiche.forEach((bereich) => {
     bereich.style.display = anzeigen ? "" : "none";
-    // Alle Formularelemente innerhalb deaktivieren/aktivieren
     bereich.querySelectorAll("input, select, textarea").forEach((el) => {
       el.disabled = !anzeigen;
     });
   });
 }
 
-// Zeigt oder versteckt den Kundentyp-Container (nur für Kunden relevant)
+// Zeigt oder versteckt den Kundentyp-Container
 function toggleKundentyp(rolle) {
   const container = document.getElementById("kundentyp-container");
   if (container) {
@@ -34,7 +34,7 @@ function toggleKundentyp(rolle) {
   }
 }
 
-// Validiert die IBAN beim Verlassen des Eingabefeldes
+// IBAN validieren und optisch markieren
 function initIbanValidation() {
   const ibanInput = document.getElementById("iban");
   const fehlerText = document.getElementById("iban-fehler");
@@ -46,21 +46,45 @@ function initIbanValidation() {
       fehlerText.textContent = isValid
         ? ""
         : "Bitte geben Sie eine gültige IBAN ein.";
+      fehlerText.style.display = isValid ? "none" : "block";
     });
   }
 }
 
-// Prüft die Passwortfelder auf Übereinstimmung und Mindestlänge
+// Passwort-Validierung (optisch + logisch)
 function checkPasswortGleichheit(event) {
-  const pw1 = document.getElementById("passwort")?.value || "";
-  const pw2 = document.getElementById("passwort2")?.value || "";
+  const pw1 = document.getElementById("passwort");
+  const pw2 = document.getElementById("passwort2");
+  const fehlermeldung = document.getElementById("passwort-fehler");
 
-  if (pw1 !== pw2) {
-    alert("Die Passwörter stimmen nicht überein.");
+  if (!pw1 || !pw2 || !fehlermeldung) return;
+
+  const val1 = pw1.value.trim();
+  const val2 = pw2.value.trim();
+  const minLength = 8;
+
+  let fehler = "";
+
+  if (val1.length < minLength) {
+    fehler = `Das Passwort muss mindestens ${minLength} Zeichen lang sein.`;
+  } else if (val1 !== val2) {
+    fehler = "Die Passwörter stimmen nicht überein.";
+  }
+
+  if (fehler) {
+    fehlermeldung.textContent = fehler;
+    fehlermeldung.style.display = "block";
+    pw1.classList.add("invalid");
+    pw2.classList.add("invalid");
     event.preventDefault();
     return false;
   }
 
+  // Falls OK
+  fehlermeldung.textContent = "";
+  fehlermeldung.style.display = "none";
+  pw1.classList.remove("invalid");
+  pw2.classList.remove("invalid");
   return true;
 }
 
@@ -71,22 +95,19 @@ window.addEventListener("DOMContentLoaded", () => {
   if (rolleElement) {
     const rolle = rolleElement.value;
     toggleKundentyp(rolle);
-    toggleKundenfelder(rolle); //  Korrekte Übergabe des Rollenwerts
+    toggleKundenfelder(rolle);
 
     rolleElement.addEventListener("change", (e) => {
       const neueRolle = e.target.value;
       toggleKundentyp(neueRolle);
-      toggleKundenfelder(neueRolle); //  beim Wechsel auch neu setzen
+      toggleKundenfelder(neueRolle);
     });
   }
 
   initIbanValidation();
 
-  const form = document.querySelector("form");
-  const pw1 = document.getElementById("passwort");
-  const pw2 = document.getElementById("passwort2");
-  // Überprüfen, ob die Elemente existieren, bevor das Event hinzugefügt wird zB. admin_dashbord verwendet kein Passwort
-  if (form && pw1 && pw2) {
+  const form = document.getElementById("passwort-formular");
+  if (form) {
     form.addEventListener("submit", checkPasswortGleichheit);
   }
 

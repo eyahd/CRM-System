@@ -10,12 +10,39 @@ $pdo = Database::getInstance()->getConnection();
 
 $suche = $_GET['suche'] ?? '';
 $rolleFilter = $_GET['rolle'] ?? '';
+$seite = isset($_GET['seite']) && is_numeric($_GET['seite']) ? (int)$_GET['seite'] : 1;
+$eintraegeProSeite = 10;
+$offset = ($seite - 1) * $eintraegeProSeite;
 
-// SQL mit optionalen Filtern
+// Zähle die Gesamtanzahl der Nutzer mit den Filtern
+$sqlCount = "SELECT COUNT(*) FROM kunden WHERE 1=1";
+$paramsCount = [];
+
+if (!empty($suche)) {
+    $sqlCount .= " AND (email LIKE :suche OR vorname LIKE :suche OR nachname LIKE :suche";
+    $paramsCount[':suche'] = "%$suche%";
+
+    if (ctype_digit($suche)) {
+        $sqlCount .= " OR id = :id";
+        $paramsCount[':id'] = (int)$suche;
+    }
+    $sqlCount .= ")";
+}
+
+if ($rolleFilter === 'kunde' || $rolleFilter === 'admin') {
+    $sqlCount .= " AND rolle = :rolle";
+    $paramsCount[':rolle'] = $rolleFilter;
+}
+
+$stmtCount = $pdo->prepare($sqlCount);
+$stmtCount->execute($paramsCount);
+$gesamtEintraege = $stmtCount->fetchColumn();
+$gesamtSeiten = ceil($gesamtEintraege / $eintraegeProSeite);
+
+// Daten abfragen
 $sql = "SELECT id, vorname, nachname, email, rolle, offene_rechnungen FROM kunden WHERE 1=1";
 $params = [];
 
-// Suche nach Name, E-Mail oder ID
 if (!empty($suche)) {
     $sql .= " AND (email LIKE :suche OR vorname LIKE :suche OR nachname LIKE :suche";
     $params[':suche'] = "%$suche%";
@@ -28,14 +55,20 @@ if (!empty($suche)) {
     $sql .= ")";
 }
 
-// Filter nach Rolle
 if ($rolleFilter === 'kunde' || $rolleFilter === 'admin') {
     $sql .= " AND rolle = :rolle";
     $params[':rolle'] = $rolleFilter;
 }
 
+$sql .= " LIMIT :limit OFFSET :offset";
+$params[':limit'] = $eintraegeProSeite;
+$params[':offset'] = $offset;
+
 $stmt = $pdo->prepare($sql);
-$stmt->execute($params);
+foreach ($params as $key => $val) {
+    $stmt->bindValue($key, $val, is_int($val) ? PDO::PARAM_INT : PDO::PARAM_STR);
+}
+$stmt->execute();
 $nutzerListe = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -43,14 +76,12 @@ $nutzerListe = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin-Dashboard</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Admin-Dashboard</h1>
 
-  <!-- Such- und Filterformular -->
   <form method="GET" action="admin_dashboard.php">
     <input type="text" name="suche" placeholder="Suche nach E-Mail, Name, ID..." value="<?= htmlspecialchars($suche) ?>">
     <select name="rolle">
@@ -61,12 +92,10 @@ $nutzerListe = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <button type="submit">Suchen</button>
   </form>
 
-  <!-- Admin hinzufügen Button -->
   <form action="add_admin.php" method="GET">
     <button type="submit">Admin hinzufügen</button>
   </form>
 
-  <!-- Ergebnisliste -->
   <table>
     <thead>
       <tr>
@@ -80,24 +109,29 @@ $nutzerListe = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </tr>
     </thead>
     <tbody>
-      <?php if (!empty($nutzerListe)): ?>
-        <?php foreach ($nutzerListe as $nutzer): ?>
-          <tr>
-            <td><?= htmlspecialchars($nutzer['id']) ?></td>
-            <td><?= htmlspecialchars($nutzer['vorname']) ?></td>
-            <td><?= htmlspecialchars($nutzer['nachname']) ?></td>
-            <td><?= htmlspecialchars($nutzer['email']) ?></td>
-            <td><?= htmlspecialchars($nutzer['rolle']) ?></td>
-            <td><?= $nutzer['offene_rechnungen'] ? 'Ja' : 'Nein' ?></td>
-            <td>
-              <a href="benutzer_bearbeiten.php?id=<?= $nutzer['id'] ?>">Bearbeiten</a>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-      <?php else: ?>
-        <tr><td colspan="7">Keine Nutzer gefunden.</td></tr>
-      <?php endif; ?>
+      <?php foreach ($nutzerListe as $nutzer): ?>
+        <tr>
+          <td><?= htmlspecialchars($nutzer['id']) ?></td>
+          <td><?= htmlspecialchars($nutzer['vorname']) ?></td>
+          <td><?= htmlspecialchars($nutzer['nachname']) ?></td>
+          <td><?= htmlspecialchars($nutzer['email']) ?></td>
+          <td><?= htmlspecialchars($nutzer['rolle']) ?></td>
+          <td><?= $nutzer['offene_rechnungen'] ? 'Ja' : 'Nein' ?></td>
+          <td>
+            <a href="benutzer_bearbeiten.php?id=<?= $nutzer['id'] ?>">Bearbeiten</a>
+          </td>
+        </tr>
+      <?php endforeach; ?>
     </tbody>
   </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <?php for ($i = 1; $i <= $gesamtSeiten; $i++): ?>
+      <a href="?seite=<?= $i ?>&suche=<?= urlencode($suche) ?>&rolle=<?= urlencode($rolleFilter) ?>" style="<?= $i == $seite ? 'font-weight: bold;' : '' ?>">
+        <?= $i ?>
+      </a>
+    <?php endfor; ?>
+  </div>
 </body>
 </html>
