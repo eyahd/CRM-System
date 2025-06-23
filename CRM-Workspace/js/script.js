@@ -80,7 +80,6 @@ function checkPasswortGleichheit(event) {
     return false;
   }
 
-  // Falls OK
   fehlermeldung.textContent = "";
   fehlermeldung.style.display = "none";
   pw1.classList.remove("invalid");
@@ -88,8 +87,121 @@ function checkPasswortGleichheit(event) {
   return true;
 }
 
+// 🔐 Login Modal initialisieren (einziger Modalteil)
+function initLoginForm() {
+  const loginForm = document.getElementById("login-form");
+  const errorText = document.getElementById("login-error");
+
+  if (!loginForm) return;
+
+  loginForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const passwort = document.getElementById("passwort").value;
+
+    fetch("login.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, passwort }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          window.location.href = data.redirect;
+        } else {
+          errorText.textContent = data.message;
+          errorText.style.display = "block";
+        }
+      })
+      .catch(() => {
+        errorText.textContent = "Es ist ein Fehler aufgetreten.";
+        errorText.style.display = "block";
+      });
+  });
+}
+
+// 🪟 Nur das Login-Modal dynamisch laden
+function openModal() {
+  const modal = document.getElementById("auth-modal");
+  const modalBody = document.getElementById("modal-body");
+
+  fetch("login.html")
+    .then((response) => response.text())
+    .then((html) => {
+      modalBody.innerHTML = html;
+      modal.style.display = "block";
+      initLoginForm();
+    })
+    .catch((err) => {
+      modalBody.innerHTML = "<p>Fehler beim Laden des Formulars.</p>";
+      modal.style.display = "block";
+    });
+}
+
+function closeModal() {
+  document.getElementById("auth-modal").style.display = "none";
+}
+
+function showStatusMessage() {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get("status");
+  if (!status) return;
+
+  const messageBox = document.createElement("div");
+  messageBox.className = "status-message";
+
+  switch (status) {
+    case "reset_sent":
+      messageBox.textContent =
+        "Wenn diese E-Mail registriert ist, wurde ein Link zum Zurücksetzen gesendet.";
+      break;
+    case "limit":
+      messageBox.textContent =
+        "Bitte warte mindestens eine Minute, bevor du erneut einen Link anforderst.";
+      break;
+    case "invalid":
+      messageBox.textContent = "Bitte gib eine gültige E-Mail-Adresse ein.";
+      break;
+    case "confirmation_sent":
+      messageBox.textContent =
+        "Registrierung erfolgreich! Bitte bestätigen Sie Ihre E-Mail-Adresse.";
+      break;
+    case "email_exists":
+      messageBox.textContent = "Diese E-Mail-Adresse ist bereits registriert.";
+      break;
+    case "kunden_update":
+      messageBox.textContent = "Ihre Kundendaten wurden aktualisiert.";
+      break;
+    case "konto_geloescht":
+      messageBox.textContent = "Ihr Konto wurde erfolgreich entfernt.";
+      break;
+    case "passwort_falsch":
+      messageBox.textContent = "Das eingegebene Passwort ist falsch.";
+      break;
+    case "offene_rechnung":
+      messageBox.textContent =
+        "Sie können Ihr Konto nicht löschen, solange noch offene Rechnungen bestehen.";
+      break;
+    case "passwort_geaendert":
+      messageBox.textContent = "Ihr Passwort wurde erfolgreich geändert.";
+      break;
+    default:
+      return;
+  }
+
+  document.body.prepend(messageBox);
+
+  setTimeout(() => {
+    messageBox.remove();
+  }, 5000);
+}
+
+// Alles Initialisieren (für klassische Seiten + Login-Modal)
 window.addEventListener("DOMContentLoaded", () => {
   toggleFirmenfelder();
+  initIbanValidation();
+  showStatusMessage();
 
   const rolleElement = document.getElementById("rolle");
   if (rolleElement) {
@@ -103,8 +215,6 @@ window.addEventListener("DOMContentLoaded", () => {
       toggleKundenfelder(neueRolle);
     });
   }
-
-  initIbanValidation();
 
   const form = document.getElementById("passwort-formular");
   if (form) {

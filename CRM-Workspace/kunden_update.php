@@ -46,7 +46,7 @@ $sql = "UPDATE kunden SET
     strasse = :strasse,
     plz = :plz,
     ort = :ort,
-    land = :land
+    land = :land,
     iban = :iban,
     bic = :bic  
 WHERE id = :id";
@@ -69,5 +69,5 @@ if (!empty($geaenderte_felder)) {
     );
 }
 
-header("Location: kunden_dashboard.php");
+header("Location: kunden_dashboard.php?status=kunden_update");
 exit;

@@ -45,8 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     // Erfolgsmeldung und Weiterleitung
-    echo "<p>Passwort erfolgreich aktualisiert. Sie werden in 5 Sekunden zur Login-Seite weitergeleitet...</p>";
-    echo '<meta http-equiv="refresh" content="5; URL=login.html">';
+    header("Location: startseite.html?status=passwort_geaendert");
     exit;
 }
 ?>

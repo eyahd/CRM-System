@@ -7,7 +7,7 @@
   </head>
   <body>
     <h2 style="text-align: center">Kundenregistrierung</h2>
-    <form action="registrieren.php" method="post" class="registration-form">
+    <form action="registrieren.php" method="post" class="registration-form" id="passwort-formular">
       <fieldset>
         <legend>Allgemeine Daten</legend>
 
@@ -84,7 +84,7 @@
 
         <label for="iban">IBAN:</label>
         <input type="text" id="iban" name="iban" placeholder="DE..." required />
-        <small id="iban-fehler" class="fehlertext"></small>
+        <small id="iban-fehler" class="fehler-text"></small>
 
         <label for="bic">BIC</label>
         <input type="text" name="bic" id="bic" required />

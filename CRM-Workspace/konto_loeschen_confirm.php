@@ -18,12 +18,14 @@ $kunde = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Überprüfung auf Existenz & Passwort
 if (!$kunde || !password_verify($pass, $kunde['passwort_hash'])) {
-    die("Passwort falsch. <a href='kunden_dashboard.php'>Zurück</a>");
+    header("Location: konto_loeschen.php?status=passwort_falsch");
+    exit;
 }
 
 // Prüfung auf offene Rechnungen
 if (!empty($kunde['offene_rechnungen'])) {
-    die("Sie können Ihr Konto nicht löschen, solange noch offene Rechnungen bestehen. <a href='kunden_dashboard.php'>Zurück</a>");
+    header("Location: konto_loeschen.php?status=offene_rechnung");
+    exit;
 }
 
 // Konto löschen
@@ -41,5 +43,5 @@ sendeEmail(
     daten: ['vorname' => $kunde['vorname']]
 );
 
-echo "Ihr Konto wurde erfolgreich gelöscht. <a href='startseite.html'>Zur Startseite</a>";
+header("Location: startseite.html?status=konto_geloescht");
 exit;

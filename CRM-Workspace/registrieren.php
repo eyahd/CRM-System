@@ -1,9 +1,16 @@
 <?php
 require_once 'db_config.php'; // Datenbankkonfiguration einfügen
 require_once 'utils.php';
-$pdo = Database::getInstance()->getConnection(); // Datenbankverbindung herstellen
+$pdo = Database::getInstance()->getConnection(); // DB-Verbindung holen
 
-// Formularwerte auslesen & vorbereiten
+// 1. Alte, nicht aktivierte Benutzer mit abgelaufenem Token löschen
+$pdo->prepare("
+    DELETE FROM kunden 
+    WHERE email_verification_token IS NOT NULL 
+      AND email_verification_expires < CURRENT_TIMESTAMP
+")->execute();
+
+// 2. Formularwerte vorbereiten
 $typ              = $_POST['typ'] ?? 'privat';
 $vorname          = $_POST['vorname'] ?? '';
 $nachname         = $_POST['nachname'] ?? '';
@@ -21,20 +28,39 @@ $bonitaet_score   = $_POST['bonitaet_score'] ?? 0;
 $iban             = $_POST['iban'] ?? null;
 $bic              = $_POST['bic'] ?? null;
 
-// E-Mail validieren 
+// 3. E-Mail validieren
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     die("Fehler: Ungültige E-Mail-Adresse.");
 }
 
-// Passwörter vergleichen und auf mindestens 8 Zeichen prüfen im Backend
-validierePasswoerter($passwort, $passwort2);
+// 4. Prüfen, ob E-Mail schon existiert
+$checkStmt = $pdo->prepare("SELECT id, email, email_verification_token, email_verification_expires FROM kunden WHERE email = :email");
+$checkStmt->execute([':email' => $email]);
+$existing = $checkStmt->fetch();
 
-// Passwort sicher hashen 
+if ($existing) {
+    if ($existing['email_verification_token'] !== null && strtotime($existing['email_verification_expires']) < time()) {
+        // Abgelaufener, nicht aktivierter Account → löschen
+        $pdo->prepare("DELETE FROM kunden WHERE id = :id")->execute([':id' => $existing['id']]);
+    } else {
+        // Bereits registrierte/aktive E-Mail blockieren
+        header("Location: registrierung.html?status=email_exists");
+    }
+}
+
+// 5. Passwort prüfen
+$fehler = validierePasswoerter(pw1: $passwort, pw2: $passwort2);
+if ($fehler !== null) {
+    echo '<p style="color:red;">' . htmlspecialchars($fehler) . '</p>';
+    exit;
+}
+
+// 6. Passwort hashen & Token vorbereiten
 $passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);
-$email_verification_token = bin2hex(random_bytes(16)); // 32 Zeichen langer hexadezimaler String
-$email_verification_expires = date('Y-m-d H:i:s', strtotime('+1 hour')); // Ablaufdatum in einer Stunde
+$email_verification_token = bin2hex(random_bytes(16));
+$email_verification_expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-// SQL einfügen
+// 7. SQL vorbereiten
 $sql = "INSERT INTO kunden (
             typ, vorname, nachname, email, passwort_hash, telefon, strasse, plz, ort, land,
             firmenname, ust_id, bonitaet_score, iban, bic, email_verification_token, email_verification_expires
@@ -43,7 +69,6 @@ $sql = "INSERT INTO kunden (
             :firmenname, :ust_id, :bonitaet_score, :iban, :bic, :email_verification_token, :email_verification_expires
         )";
 
-// SQL-Statement vorbereiten
 $stmt = $pdo->prepare($sql);
 $params = [
     ':typ'             => $typ,
@@ -65,16 +90,15 @@ $params = [
     ':email_verification_expires' => $email_verification_expires
 ];
 
-// Transaktion starten
+// 8. Transaktion starten
 $pdo->beginTransaction();
 
 try {
-    // Registrierung in der Datenbank durchführen
     if (!$stmt->execute($params)) {
         throw new Exception("Fehler beim Einfügen in die Datenbank.");
     }
 
-    // E-Mail-Bestätigung senden
+    // 9. Bestätigungs-E-Mail senden
     require 'mailer.php';
     $verification_link = "http://localhost/CRM-Workspace/verify_email.php?token=$email_verification_token";
     sendeEmail(
@@ -84,12 +108,9 @@ try {
         daten: ['verification_link' => $verification_link]
     );
 
-    // Wenn alles gut geht, Transaktion committen
     $pdo->commit();
-
-    echo "Registrierung erfolgreich! Bitte bestätigen Sie Ihre E-Mail-Adresse.";
+     header("Location: startseite.html?status=confirmation_sent");
 } catch (Exception $e) {
-    // Bei Fehlern die Transaktion zurückrollen
     $pdo->rollBack();
     echo "Fehler: Registrierung fehlgeschlagen. " . $e->getMessage();
     file_put_contents(__DIR__ . '/logs/login_errors.log', date('Y-m-d H:i:s') . " - Fehler: " . $e->getMessage() . PHP_EOL, FILE_APPEND);

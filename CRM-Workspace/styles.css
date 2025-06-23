@@ -2,23 +2,20 @@
    Design Tokens & Variables
    ======================= */
 :root {
-  /* Farbpalette */
-  --color-primary: #ff5f00;    /* Sixt-Orange */
-  --color-dark:    #111;       /* dunkler Hintergrund */
-  --color-light:   #fff;       /* Weiß für Text */
-  --color-muted:   #666;       /* dezenter Text */
+  --color-primary: #ff5f00;
+  --color-dark: #111;
+  --color-light: #fff;
+  --color-muted: #666;
 
-  /* Typografie */
-  --font-base:     'Arial', sans-serif;
-  --fs-h1:         2.5rem;
-  --fs-h2:         1.75rem;
-  --fs-body:       1rem;
+  --font-base: "Arial", sans-serif;
+  --fs-h1: 2.5rem;
+  --fs-h2: 1.75rem;
+  --fs-body: 1rem;
 
-  /* Abstände */
-  --spacing-xs:    0.5rem;
-  --spacing-sm:    1rem;
-  --spacing-md:    1.5rem;
-  --spacing-lg:    2.5rem;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
 }
 
 /* =======================
@@ -38,47 +35,51 @@ body {
 }
 
 /* =======================
-   Formular-Container & Auth-Section
+   Formular-Container
    ======================= */
 form,
-.auth-section,
 .container {
   max-width: 700px;
   margin: 0 auto;
   background-color: #1a1a1a;
   padding: var(--spacing-lg) var(--spacing-md);
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* =======================
    Überschriften
    ======================= */
-h2, .hero h1, .container h1 {
+h2,
+.hero h1,
+.container h1 {
   text-align: center;
   margin-bottom: var(--spacing-md);
   color: var(--color-primary);
 }
-h2, .container h1 {
+h2,
+.container h1 {
   font-size: var(--fs-h2);
 }
 
 /* =======================
    Fieldset & Legend
    ======================= */
-.registration-form fieldset,
-.edit-user-form fieldset,
-.auth-form fieldset {
+.registration-form fieldset {
   border: 1px solid #444;
   border-radius: 8px;
   padding: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
   background-color: #222;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.registration-form legend,
-.edit-user-form legend,
-.auth-form legend {
+.edit-user-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+.registration-form legend {
   font-weight: 700;
   font-size: 1.1em;
   padding: 0 var(--spacing-xs);
@@ -115,7 +116,7 @@ input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 8px rgba(255,95,0,0.4);
+  box-shadow: 0 0 8px rgba(255, 95, 0, 0.4);
   outline: none;
 }
 
@@ -125,22 +126,32 @@ textarea:focus {
 input.invalid,
 select.invalid,
 textarea.invalid {
-  border: 2px solid #e74c3c;
-  background-color: #fdecea;
+  border: 2px solid var(--color-primary);
+  background-color: #331a00;
+  color: #fff;
 }
-.fehler-text,
-.fehlertext {
+.fehler-text {
   color: #e74c3c;
   font-size: 0.85em;
   margin-top: var(--spacing-xs);
   display: none;
 }
+.forgot-password {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  text-align: left;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.forgot-password:hover {
+  text-decoration: underline;
+}
 
 /* =======================
-   Button Styling
+   Buttons
    ======================= */
-button,
-.auth-form button {
+button {
   display: block;
   width: auto;
   max-width: 260px;
@@ -153,14 +164,13 @@ button,
   font-size: 1em;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(255,95,0,0.4);
+  box-shadow: 0 4px 8px rgba(255, 95, 0, 0.4);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-button:hover,
-.auth-form button:hover {
+button:hover {
   background-color: #e65a00;
   color: var(--color-light);
-  box-shadow: 0 6px 12px rgba(230,90,0,0.6);
+  box-shadow: 0 6px 12px rgba(230, 90, 0, 0.6);
 }
 
 .button,
@@ -182,14 +192,13 @@ button:hover,
 }
 
 /* =======================
-   Responsive Optimierung
+   Responsive Design
    ======================= */
 @media (max-width: 768px) {
   body {
     padding: var(--spacing-md);
   }
   form,
-  .auth-section,
   .container {
     padding: var(--spacing-md);
   }
@@ -200,12 +209,545 @@ button:hover,
 }
 
 /* =======================
-   Footer
+   Header & Footer
    ======================= */
+.site-header {
+  background-color: #1a1a1a;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid #333;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* volle Breite */
+  padding: 0 var(--spacing-md); /* etwas Abstand vom Rand */
+}
+
+.header-content h1 {
+  font-size: var(--fs-h2);
+  color: var(--color-primary);
+}
+.auth-links a {
+  color: var(--color-light);
+  margin-left: var(--spacing-sm);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+.auth-links a:hover {
+  color: var(--color-primary);
+}
 .site-footer {
   text-align: center;
   padding: var(--spacing-md) 0;
   background: var(--color-dark);
   color: var(--color-light);
   margin-top: var(--spacing-lg);
+  border-top: 1px solid #333;
+}
+
+/* =======================
+   Logo & Titel
+   ======================= */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+/* =======================
+   Info-Boxen
+   ======================= */
+
+.status-message {
+  background-color: #fff4ec;
+  border: 1px solid #ff5f00;
+  color: #1a1a1a;
+  padding: 1rem 1.5rem;
+  margin: 1rem auto;
+  width: fit-content;
+  max-width: 90%;
+  font-weight: 500;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(255, 95, 0, 0.15);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =======================
+   Email-Bestätigung
+   ======================= */
+
+.confirmation-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  text-align: center;
+  color: #1a1a1a; /* Dunkles Grau statt Schwarz */
+  margin: auto;
+}
+
+.confirmation-container h1 {
+  color: #f05a28; /* Sixt-Orange */
+  margin-bottom: 1rem;
+}
+
+.confirmation-container p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.confirmation-container a {
+  color: #f05a28; /* Sixt-Orange */
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.confirmation-container a:hover {
+  border-color: #f05a28;
+}
+
+.confirmation-container .spinner {
+  margin: 0 auto 1.5rem auto;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top-color: #f05a28; /* Sixt-Orange */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =======================
+   Modal Fenster
+   ======================= */
+.modal {
+  display: none; /* Standardmäßig versteckt */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  margin: 10% auto;
+  padding: var(--spacing-lg);
+  border: 1px solid #444;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  color: var(--color-light);
+}
+
+#auth-modal .modal-content {
+  background-color: var(--form-bg, #1e1e1e);
+  padding: 1rem;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 95%;
+  margin: 5% auto;
+}
+
+.close-button {
+  color: var(--color-light);
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.close-button:hover {
+  color: var(--color-primary);
+}
+
+/* =======================
+   Kunden-Dashboard
+   ======================= */
+
+.dashboard-section h2 {
+  color: #ff5f00;
+  margin-bottom: 1rem;
+}
+
+.dashboard-form .form-group {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Wrapper für das Dashboard */
+.dashboard-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Abgrenzung der Bereiche */
+.dashboard-section {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  border: 1px solid #444;
+
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+/* Einheitliche Überschriften */
+.dashboard-section h2 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+  font-size: var(--fs-h2);
+  text-align: center;
+}
+
+/* Einheitliches Formular und Abstand */
+.dashboard-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Gefahr-Button (Löschen) farblich abheben*/
+.button-danger {
+  background-color: #d0342c;
+  color: #fff;
+}
+.button-danger:hover {
+  background-color: #a12a24;
+}
+
+/* Standard-Button */
+
+/* Hinweistext im Formular */
+.dashboard-form p {
+  text-align: center;
+  color: var(--color-light);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Responsiv für kleine Screens */
+@media (max-width: 600px) {
+  .dashboard-form {
+    width: 100%;
+  }
+  .button,
+  .button-danger {
+    width: 100%;
+  }
+}
+
+/* =======================
+   Konto-Löschen Formular
+   ======================= */
+
+.account-delete-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  color: var(--color-light);
+  text-align: center;
+}
+
+.account-delete-form h2 {
+  color: #e74c3c;
+  font-size: var(--fs-h2);
+  margin-bottom: var(--spacing-sm);
+}
+
+.account-delete-form p {
+  margin-bottom: var(--spacing-md);
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--color-light);
+}
+
+.account-delete-form input[type="password"] {
+  width: 100%;
+  padding: var(--spacing-sm);
+  margin: var(--spacing-sm) 0;
+  border: 1px solid var(--color-muted);
+  border-radius: 6px;
+  background-color: #111;
+  color: var(--color-light);
+  font-size: var(--fs-body);
+  transition: border-color 0.3s ease;
+}
+
+.account-delete-form input[type="password"]:focus {
+  border-color: #e74c3c;
+  outline: none;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+}
+
+.account-delete-form button {
+  background-color: #c0392b;
+  color: #fff;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: var(--spacing-sm);
+  box-shadow: 0 4px 12px rgba(192, 57, 43, 0.4);
+}
+
+.account-delete-form button:hover {
+  background-color: #e74c3c;
+}
+
+.account-delete-form a {
+  display: inline-block;
+  margin-top: var(--spacing-sm);
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.account-delete-form a:hover {
+  color: #ff7840;
+}
+
+/* =======================
+   Admin-Dashboard Styles
+   ======================= */
+
+
+.admindash {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  background-color: #1a1a1a; /* dunkles Anthrazit */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  color: #fff;
+}
+
+/* Formulare */
+.admindash form {
+  margin: 1rem 0;
+}
+
+.admindash input[type="text"],
+.admindash select {
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ff5f00; /* Sixt-Orange Rahmen */
+  border-radius: 4px;
+  margin-right: 0.6rem;
+  width: 200px;
+  max-width: 100%;
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+.admindash input[type="text"]::placeholder {
+  color: #d9d9d9;
+}
+
+.admindash button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #ff5f00; /* Sixt-Orange */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.admindash button:hover {
+  background-color: #e65000; /* dunkleres Orange beim Hover */
+}
+
+/* Tabelle */
+.admindash table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.8);
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+  color: #fff;
+}
+
+.admindash th, .admindash td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #444;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.admindash th {
+  background-color: #ff5f00; /* Sixt-Orange */
+  color: white;
+  font-weight: 600;
+  user-select: none;
+}
+
+.admindash tbody tr:hover {
+  background-color: #3a3a3a;
+}
+
+/* Aktion Link */
+.admindash a {
+  color: #ff5f00;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.admindash a:hover {
+  text-decoration: underline;
+}
+
+/* Pagination */
+.admindash .pagination {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.admindash .pagination a {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.admindash .pagination a.active,
+.admindash .pagination a:hover {
+  background-color: #ff5f00;
+  color: white;
+}
+
+
+
+/* =======================
+    Startseite Hero-Sektion
+   ======================= */
+.startseite-hero {
+  background-image: url("assets/hero-car.jpg"); /* Bild in /assets/ ablegen */
+  background-size: cover;
+  background-position: center;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+  max-width: 90%;
+}
+
+.hero-overlay h1 {
+  font-size: 2.5rem;
+  color: var(--color-primary, #ff5f00);
+  margin-bottom: 0.5rem;
+}
+
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.cta-button {
+  background-color: var(--color-primary, #ff5f00);
+  color: white;
+  padding: 0.75rem 2rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #e55500;
+}
+
+/* Feature-Sektion auf Startseite */
+.features {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 3rem 1rem;
+  background-color: #1a1a1a;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.feature {
+  flex: 1 1 250px;
+  background-color: #222;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  max-width: 320px;
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature h3 {
+  color: var(--color-primary, #ff5f00);
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.feature p {
+  font-size: 1rem;
+  color: #ccc;
 }

@@ -63,8 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare($update);
     $stmt->execute($daten);
 
-    echo "<p>Benutzerdaten wurden aktualisiert.</p>";
-    echo '<meta http-equiv="refresh" content="2; URL=admin_dashboard.php">';
+    header("Location: admin_dashboard.php?status=kunden_update");
     exit;
 }
 ?>
@@ -118,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="iban">IBAN:</label>
             <input type="text" id="iban" name="iban" placeholder="DE..." required
                 value="<?= htmlspecialchars($benutzer['iban'] ?? '') ?>" />
-            <small id="iban-fehler" class="fehlertext"></small>
+            <small id="iban-fehler" class="fehler-text"></small>
 
             <label for="bic">BIC:</label>
             <input type="text" name="bic" id="bic" required

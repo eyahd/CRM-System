@@ -35,7 +35,8 @@ $stmt->execute([':id' => $kundeId]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user || !password_verify($altesPasswort, $user['passwort_hash'])) {
-    die("Das aktuelle Passwort ist falsch.");
+    header("Location: kunden_dashboard.php?status=passwort_falsch");
+    exit;
 }
 
 // Neues Passwort speichern
@@ -52,10 +53,10 @@ sendeEmail(
     typ: 'passwort_update',
     empfaenger_email: $user['email'],
     empfaenger_name: $user['vorname'],
-    daten: []
+    daten: ['vorname' => $user['vorname']]
 );
 
 // Weiterleitung mit Erfolgsmeldung
-header("Location: kunden_dashboard.html");
+header("Location: kunden_dashboard.php?status=passwort_geaendert");
 exit;
 

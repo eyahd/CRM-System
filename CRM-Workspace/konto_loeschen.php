@@ -27,15 +27,16 @@ if (!$kunde) {
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h2>Konto unwiderruflich löschen</h2>
-  <p>Hallo <?= htmlspecialchars($kunde['vorname']) ?>, bitte bestätigen Sie die Löschung mit Ihrem aktuellen Passwort.</p>
+  <form class="account-delete-form" action="konto_loeschen_confirm.php" method="POST">
+    <h2>Konto unwiderruflich löschen</h2>
+    <p>Hallo <?= htmlspecialchars($kunde['vorname']) ?>,<br>bitte bestätigen Sie die Löschung mit Ihrem aktuellen Passwort.</p>
 
-  <form action="konto_loeschen_confirm.php" method="POST">
-    <label for="passwort">Passwort:</label>
-    <input type="password" name="passwort" required />
-    <button type="submit" style="background-color: #c0392b; color: white;">Konto löschen</button>
+    <input type="password" name="passwort" placeholder="Passwort eingeben" required />
+
+    <button type="submit">Konto löschen</button>
+    <a href="kunden_dashboard.php">Abbrechen</a>
   </form>
-
-  <p><a href="kunden_dashboard.php">Abbrechen</a></p>
+  <script src="js/script.js"></script>
 </body>
+
 </html>

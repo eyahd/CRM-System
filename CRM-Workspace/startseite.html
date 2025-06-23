@@ -1,19 +1,65 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Willkommen</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Willkommen im Kundenportal</h1>
-        <p>Bitte wählen Sie:</p>
-        <div class="button-group">
-            <a href="registrierung.html" class="button">Registrieren</a>
-            <a href="login.html" class="button">Anmelden</a>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <div class="logo-container">
+          <img src="assets/logo.png" alt="Firmenlogo" class="logo" />
         </div>
-    </div>
-</body>
+        <div class="auth-links">
+          <a href="registrierung.html">Registrieren</a>
+          <a>|</a>
+          <a href="#" onclick="openModal('login')">Anmelden</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="startseite-hero">
+        <div class="hero-overlay">
+          <h1>Willkommen bei RideFox</h1>
+          <p>
+            Finden Sie Ihr perfektes Fahrzeug – schnell, zuverlässig und
+            günstig.
+          </p>
+          <a href="registrierung.html" class="cta-button">Jetzt registrieren</a>
+        </div>
+      </section>
+
+      <!-- Modal -->
+      <div id="auth-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeModal()">&times;</span>
+          <div id="modal-body"></div>
+        </div>
+      </div>
+    </main>
+
+    <section class="features">
+      <div class="feature">
+        <h3>Große Fahrzeugauswahl</h3>
+        <p>Vom Kleinwagen bis zum Transporter</p>
+      </div>
+      <div class="feature">
+        <h3>Faire Preise</h3>
+        <p>Transparent & ohne versteckte Kosten</p>
+      </div>
+      <div class="feature">
+        <h3>24/7 Rückgabe</h3>
+        <p>Unkompliziert und flexibel</p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>&copy; 2025 RideFox</p>
+    </footer>
+    <script src="js/script.js"></script>
+    <script src="js/iban.js"></script>
+  </body>
 </html>

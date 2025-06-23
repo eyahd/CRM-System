@@ -1,3 +1,5 @@
 2025-05-13 11:17:18 - Fehler: E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.
 2025-05-13 11:19:00 - Fehler: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'peter@pan.de' for key 'email'
 2025-06-06 05:15:06 - Fehler: E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.
+2025-06-23 17:01:23 - Fehler: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'bums@birne.de' for key 'email'
+2025-06-23 17:02:19 - Fehler: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'bums@birne.de' for key 'email'

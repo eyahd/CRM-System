@@ -80,58 +80,60 @@ $nutzerListe = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Admin-Dashboard</h1>
+  <div class="admindash">
+    <h1>Admin-Dashboard</h1>
 
-  <form method="GET" action="admin_dashboard.php">
-    <input type="text" name="suche" placeholder="Suche nach E-Mail, Name, ID..." value="<?= htmlspecialchars($suche) ?>">
-    <select name="rolle">
-      <option value="">Alle Rollen</option>
-      <option value="kunde" <?= $rolleFilter === 'kunde' ? 'selected' : '' ?>>Kunden</option>
-      <option value="admin" <?= $rolleFilter === 'admin' ? 'selected' : '' ?>>Admins</option>
-    </select>
-    <button type="submit">Suchen</button>
-  </form>
+    <form method="GET" action="admin_dashboard.php">
+      <input type="text" name="suche" placeholder="Suche nach E-Mail, Name, ID..." value="<?= htmlspecialchars($suche) ?>">
+      <select name="rolle">
+        <option value="">Alle Rollen</option>
+        <option value="kunde" <?= $rolleFilter === 'kunde' ? 'selected' : '' ?>>Kunden</option>
+        <option value="admin" <?= $rolleFilter === 'admin' ? 'selected' : '' ?>>Admins</option>
+      </select>
+      <button type="submit">Suchen</button>
+    </form>
 
-  <form action="add_admin.php" method="GET">
-    <button type="submit">Admin hinzufügen</button>
-  </form>
+    <form action="add_admin.php" method="GET">
+      <button type="submit">Admin hinzufügen</button>
+    </form>
 
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Vorname</th>
-        <th>Nachname</th>
-        <th>E-Mail</th>
-        <th>Rolle</th>
-        <th>Offene Rechnungen</th>
-        <th>Aktion</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($nutzerListe as $nutzer): ?>
+    <table>
+      <thead>
         <tr>
-          <td><?= htmlspecialchars($nutzer['id']) ?></td>
-          <td><?= htmlspecialchars($nutzer['vorname']) ?></td>
-          <td><?= htmlspecialchars($nutzer['nachname']) ?></td>
-          <td><?= htmlspecialchars($nutzer['email']) ?></td>
-          <td><?= htmlspecialchars($nutzer['rolle']) ?></td>
-          <td><?= $nutzer['offene_rechnungen'] ? 'Ja' : 'Nein' ?></td>
-          <td>
-            <a href="benutzer_bearbeiten.php?id=<?= $nutzer['id'] ?>">Bearbeiten</a>
-          </td>
+          <th>ID</th>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>E-Mail</th>
+          <th>Rolle</th>
+          <th>Offene Rechnungen</th>
+          <th>Aktion</th>
         </tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <?php foreach ($nutzerListe as $nutzer): ?>
+          <tr>
+            <td><?= htmlspecialchars($nutzer['id']) ?></td>
+            <td><?= htmlspecialchars($nutzer['vorname']) ?></td>
+            <td><?= htmlspecialchars($nutzer['nachname']) ?></td>
+            <td><?= htmlspecialchars($nutzer['email']) ?></td>
+            <td><?= htmlspecialchars($nutzer['rolle']) ?></td>
+            <td><?= $nutzer['offene_rechnungen'] ? 'Ja' : 'Nein' ?></td>
+            <td>
+              <a href="benutzer_bearbeiten.php?id=<?= $nutzer['id'] ?>">Bearbeiten</a>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
 
-  <!-- Pagination -->
-  <div class="pagination">
-    <?php for ($i = 1; $i <= $gesamtSeiten; $i++): ?>
-      <a href="?seite=<?= $i ?>&suche=<?= urlencode($suche) ?>&rolle=<?= urlencode($rolleFilter) ?>" style="<?= $i == $seite ? 'font-weight: bold;' : '' ?>">
-        <?= $i ?>
-      </a>
-    <?php endfor; ?>
+    <div class="pagination">
+      <?php for ($i = 1; $i <= $gesamtSeiten; $i++): ?>
+        <a href="?seite=<?= $i ?>&suche=<?= urlencode($suche) ?>&rolle=<?= urlencode($rolleFilter) ?>" class="<?= $i == $seite ? 'active' : '' ?>">
+          <?= $i ?>
+        </a>
+      <?php endfor; ?>
+    </div>
   </div>
+  <script src="js/script.js"></script>
 </body>
 </html>
