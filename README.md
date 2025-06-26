@@ -19,8 +19,9 @@ CRM-Workspace/
 ├── js/script.js                  # Funktionen zum Steuern des Formularverhaltens in Abhängigkeit des in der Session befindlichen Anwenders (kunde/admin)
 ├── js/iban.js                    # Skript zur Validierung der Iban auf ISO 13616 IBAN Registry technical specification
 ├── add_admin.php                 # Admin manuell hinzufügen
-├── admin_dashboard.html/.php     # Admin-Bereich
-├── benutzer_bearbeiten.php       # Kunden durch Admin bearbeiten
+├── admin_dashboard.php           # Admin-Bereich
+├── config/mail_config.php        # SMTP Daten
+├── benutzer_bearbeiten.php       # Kunden durch Admin bearbeiten/Suchen
 ├── composer.json / composer.lock # Abhängigkeiten zum automatischen einbinden des PHPMailers
 ├── db_config.php                 # Datenbankverbindung
 ├── konto_loeschen*.php           # Konto löschen (inkl. Bestätigung)
@@ -28,11 +29,14 @@ CRM-Workspace/
 ├── kunden_update.php             # Kundendaten aktualisieren
 ├── login.html / login.php        # Login-Logik. Leitet automatisch auf das zugehörige Dashboard in Abhängigkeit des Anwenders admin/kunde
 ├── logout.php                    # Logout
+├── utils.php                     # Funktion zur Passwortvalidierung
 ├── mailer.php                    # PHPMailer-Integration
-├── passwort_vergessen*.php       # Passwort zurücksetzen
+├── passwort_vergessen.php        # Passwort zurücksetzen
+├── passwort_aendern.php          # Passwort zurücksetzen
+├── passwort_zurueksetzen.php     # Passwort zurücksetzen
 ├── registrierung.html/.php       # Registrierung
 ├── startseite.html               # Landing Page
-├── styles.css                    # Basis-Styles / Muss überarbeitet werden / dient nur zum Funktionstest
+├── styles.css                    # Styles 
 ├── verify_email.php              # E-Mail-Verifizierung
 ├── PapercutService/              # Lokaler SMTP-Service 
 ├── vendor/                       # Initialisierter Composer. Enthält PHPMailer Funktionen für den E-Mail versandt.

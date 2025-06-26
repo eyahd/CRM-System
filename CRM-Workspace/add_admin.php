@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'vorname' => $vorname,
                     'nachname' => $nachname,
                     'email' => $email,
-                    'login_link' => 'https://localhost/CRM-Workspace/login.html',
-                    'passwort' => $passwort 
+                    'login_link' => 'https://localhost/CRM-Workspace/startseite.html',
+                    'passwort' => $passwort
                 ]
             );
         } else {
@@ -69,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <h2>Neuen Admin anlegen</h2>
-<!-- Styles überarbeiten und allgemeine vorlage verwenden für alle Seiten -->
     <?php if ($fehlermeldung): ?>
         <p style="color: red;"><?= htmlspecialchars($fehlermeldung) ?></p>
     <?php endif; ?>
@@ -90,8 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Admin erstellen</button>
     </form>
 
-    <br>
-    <a href="admin_dashboard.php">Zurück zum Dashboard</a>
+    <div class="center-button">
+        <a href="admin_dashboard.php" class="button">Zurück zum Dashboard</a>
+    </div>
 </body>
 
 </html>

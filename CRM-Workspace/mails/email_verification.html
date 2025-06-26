@@ -1,35 +1,78 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <title>E-Mail bestätigen</title>
-  </head>
-  <body style="font-family: Arial, sans-serif; line-height: 1.6">
+<head>
+  <meta charset="UTF-8" />
+  <title>E-Mail bestätigen</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #111;
+      color: #f1f1f1;
+      margin: 0;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      border: 1px solid #333;
+    }
+
+    h2 {
+      color: #ff5f00;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      color: #ddd;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: #ff5f00;
+      color: #111;
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1rem;
+      box-shadow: 0 4px 10px rgba(255, 95, 0, 0.3);
+    }
+
+    .button:hover {
+      background-color: #e65a00;
+      color: #fff;
+    }
+
+    .fallback-link {
+      word-break: break-all;
+      font-size: 0.9rem;
+      color: #aaa;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 6px;
+      border-left: 4px solid #ff5f00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
     <h2>Willkommen bei RideFox!</h2>
     <p>Hallo,</p>
+    <p>bitte bestätigen Sie Ihre E-Mail-Adresse, indem Sie auf den folgenden Button klicken:</p>
     <p>
-      bitte bestätigen Sie Ihre E-Mail-Adresse, indem Sie auf den folgenden Link
-      klicken:
+      <a href="{{verification_link}}" class="button">E-Mail-Adresse bestätigen</a>
     </p>
-    <p>
-      <a
-        href="{{verification_link}}"
-        style="
-          background-color: #4caf50;
-          color: white;
-          padding: 10px 15px;
-          text-decoration: none;
-          border-radius: 5px;
-        "
-      >
-        E-Mail-Adresse bestätigen
-      </a>
-    </p>
-    <p>
-      Falls der Button nicht funktioniert, kopieren Sie bitte diesen Link in die
-      Adresszeile Ihres Browsers:
-    </p>
-    <p>{{verification_link}}</p>
-    <p>Vielen Dank!</p>
-  </body>
+    <p>Falls der Button nicht funktioniert, nutzen Sie bitte den folgenden Link:</p>
+    <p class="fallback-link">{{verification_link}}</p>
+    <p>Vielen Dank und gute Fahrt!<br>Ihr RideFox Team</p>
+  </div>
+</body>
 </html>

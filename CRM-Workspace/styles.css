@@ -191,6 +191,12 @@ button:hover {
   color: var(--color-light);
 }
 
+.center-button {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+
 /* =======================
    Responsive Design
    ======================= */
@@ -751,3 +757,14 @@ button:hover {
   font-size: 1rem;
   color: #ccc;
 }
+
+
+
+
+
+
+
+
+
+
+
