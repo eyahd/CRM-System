@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neue Kampagne erstellen</title>
+  <title> Kampagne erstellen</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -12,14 +12,13 @@
       color: #333;
       margin: 0;
       padding: 0;
-     background-image: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80');
       background-size: cover;
       background-position: center;
     }
     .container {
       max-width: 850px;
       margin: 60px auto;
-      background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for form */
+      background-color: rgba(255, 255, 255, 0.9);
       padding: 40px;
       border-radius: 16px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -39,19 +38,29 @@
       font-weight: 500;
       color: #34495e;
     }
-    input[type="text"], input[type="date"], textarea, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbcecf;
-      border-radius: 12px;
-      margin-top: 8px;
-      font-size: 1rem;
-      background-color: #ffffff;
-      transition: border-color 0.3s ease;
-    }
-    input[type="text"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
-      border-color: #6c5ce7;
-    }
+    input[type="text"],
+input[type="date"],
+input[type="email"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbcecf;
+  border-radius: 12px;
+  margin-top: 8px;
+  font-size: 1rem;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #6c5ce7;
+}
+
     .zielgruppen-options {
       margin-top: 10px;
       display: flex;
@@ -87,69 +96,18 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-
-    /* Cute icons or images around the form */
-    .icon1, .icon2, .icon3 {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-    .icon1 {
-      top: 10px;
-      left: 10px;
-      background-image: url('https://sl.bing.net/fyI1MU8gQZU'); /* Replace with your cute icon */
-    }
-    .icon2 {
-      bottom: 20px;
-      right: 30px;
-      background-image: url('https://sl.bing.net/fyI1MU8gQZU');
-    }
-    .icon3 {
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      background-image: url('https://sl.bing.net/fyI1MU8gQZU');
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Neue Kampagne erstellen</h1>
-   <form action="save_campaign.php" method="POST">
+    <h1>Kampagne erstellen</h1>
+    <form action="save_campaign.php" method="POST">
 
-    <!-- Inside your form -->
-<label for="kampagnentyp">Kampagnentyp</label>
-<select name="kampagnentyp" id="kampagnentyp" required onchange="handleKampagnentypChange()">
-  <option value="">Bitte auswählen</option>
-  <option value="seasonal">Saisonal</option>
-  <option value="birthday">Geburtstag</option>
-  <option value="high_spenders">Top-Kunden</option>
-  <option value="new_customers">Neukunden</option>
-  <option value="reactivation">Reaktivierung</option>
-  <option value="custom">Benutzerdefiniert</option>
-</select>
-
-<!-- Seasonal dropdown shown only if 'seasonal' is selected -->
-<div id="seasonal_subtypes" class="subsection hidden">
-  <label for="season_select">Jahreszeit wählen:</label>
-  <select id="season_select" name="season_select" onchange="setSeasonalMessage()">
-    <option value="">Bitte wählen</option>
-    <option value="spring">Frühling</option>
-    <option value="summer">Sommer</option>
-    <option value="autumn">Herbst</option>
-    <option value="winter">Winter</option>
-  </select>
-</div>
-
-
-
-<label for="description">Beschreibung</label>
-<textarea id="description" name="beschreibung" rows="4" required></textarea>
-
-
-
+      <label for="language">Sprache der Nachricht</label>
+      <select id="language" name="language" onchange="handleKampagnentypChange()" aria-label="Sprache">
+        <option value="de" selected>Deutsch</option>
+        <option value="en">Englisch</option>
+      </select>
 
       <label>Zielgruppe wählen:</label>
       <div class="zielgruppen-options">
@@ -161,7 +119,7 @@
 
       <div id="gruppe_fields" class="subsection">
         <label for="kategorie">Kundengruppe</label>
-        <select id="kategorie" name="kategorie">
+        <select id="kategorie" name="kategorie" aria-label="Kundengruppe">
           <option value="tier_a">Tier A Kunden</option>
           <option value="tier_b">Tier B Kunden</option>
           <option value="tier_c">Tier C Kunden</option>
@@ -170,106 +128,269 @@
 
       <div id="individuell_fields" class="subsection hidden">
         <label for="kunden_id">Kunden-ID</label>
-        <input type="text" id="kunden_id" name="kunden_id">
+        <input type="text" id="kunden_id" name="kunden_id" maxlength="8"
+               pattern="^[A-Za-z]{2}[0-9]{6}$"
+               title="Die ID muss mit 2 Buchstaben und 6 Ziffern enden (z. B. AB123456)"
+               aria-label="Kunden-ID">
 
         <label for="email">E-Mail Adresse</label>
-        <input type="text" id="email" name="email">
+        <input type="email" id="email" name="email" required placeholder="z. B. max@example.com" aria-label="E-Mail">
       </div>
 
+      <label for="kampagnenkategorie">Kampagnenkategorie</label>
+      <select id="kampagnenkategorie" onchange="filterKampagnenTypen()" aria-label="Kampagnenkategorie">
+        <option value="">Bitte wählen</option>
+        <option value="ereignis">📅 Ereigniskampagne</option>
+        <option value="zeit">⏰ Zeitkampagne</option>
+        <option value="benutzerdefiniert">⚙️ Benutzerdefiniert</option>
+      </select>
+
+      <div id="kampagnentyp_wrapper" class="subsection hidden">
+        <label for="kampagnentyp">Kampagnentyp</label>
+        <select name="kampagnentyp" id="kampagnentyp" onchange="handleKampagnentypChange()" required aria-label="Kampagnentyp"></select>
+      </div>
 
       <label for="startdatum">Startdatum</label>
-      <input type="date" id="startdatum" name="startdatum" required>
+      <input type="date" id="startdatum" name="startdatum" required aria-label="Startdatum">
 
       <label for="enddatum">Enddatum</label>
-      <input type="date" id="enddatum" name="enddatum" required>
+      <input type="date" id="enddatum" name="enddatum" required aria-label="Enddatum">
+
+      <label for="betreff">Betreff</label>
+      <input type="text" id="betreff" name="betreff" required aria-label="Betreff" />
 
       <label for="nachricht">Nachricht</label>
-      <textarea id="nachricht" name="nachricht" rows="4" required></textarea>
+      <textarea id="nachricht" name="nachricht" rows="4" required aria-label="Nachricht"></textarea>
 
-<input type="hidden" name="action" id="formAction" value="save_only">
-
-<button type="submit" class="button" onclick="setFormAction('save_only')">Kampagne senden</button>
-
+      <input type="hidden" name="action" id="formAction" value="save_only">
+      <button type="submit" class="button" onclick="setFormAction('save_only')">Kampagne senden</button>
     </form>
-
-<script>
-function toggleZielgruppe(type) {
-  document.getElementById("gruppe_fields").classList.toggle("hidden", type !== 'gruppe');
-  document.getElementById("individuell_fields").classList.toggle("hidden", type !== 'individuell');
-}
-
-document.querySelector("form").addEventListener("submit", function (e) {
-  const start = new Date(document.getElementById("startdatum").value);
-  const end = new Date(document.getElementById("enddatum").value);
-  if (start > end) {
-    alert("Enddatum darf nicht vor dem Startdatum liegen.");
-    e.preventDefault();
-    return;
-  }
-
-  const zielgruppeTyp = document.querySelector('input[name="zielgruppe_typ"]:checked').value;
-  const emailField = document.getElementById("email").value.trim();
-
-  if (zielgruppeTyp === "individuell" && emailField === "") {
-    alert("Bitte geben Sie eine E-Mail-Adresse an, wenn 'Individuell' gewählt wurde.");
-    e.preventDefault();
-  
-  }
-});
-
-function handleKampagnentypChange() {
-  const kampagnentyp = document.getElementById("kampagnentyp").value;
-  const seasonalSubtypes = document.getElementById("seasonal_subtypes");
-  const nachricht = document.getElementById("nachricht");
-
-  // Hide seasonal selector by default
-  seasonalSubtypes.classList.add("hidden");
-  document.getElementById("season_select").value = "";
-
-  switch (kampagnentyp) {
-    case "birthday":
-      nachricht.value = "Alles Gute zum Geburtstag! 🎉 Wir haben ein spezielles Angebot für Sie!";
-      break;
-    case "high_spenders":
-      nachricht.value = "Vielen Dank für Ihre Treue! Als Top-Kunde erhalten Sie exklusive Vorteile.";
-      break;
-    case "new_customers":
-      nachricht.value = "Willkommen bei uns! 🎉 Wir freuen uns, Sie als neuen Kunden begrüßen zu dürfen.";
-      break;
-    case "reactivation":
-      nachricht.value = "Wir vermissen Sie! Kommen Sie zurück und sichern Sie sich ein spezielles Angebot.";
-      break;
-    case "custom":
-      nachricht.value = "";
-      break;
-    case "seasonal":
-      seasonalSubtypes.classList.remove("hidden");
-      nachricht.value = ""; // Wait for seasonal subtype to be selected
-      break;
-    default:
-      nachricht.value = "";
-  }
-}
-
-function setSeasonalMessage() {
-  const season = document.getElementById("season_select").value;
-  const nachricht = document.getElementById("nachricht");
-
-  const messages = {
-    spring: "Fröhlichen Frühling! 🌸 Entdecken Sie unsere neuen Frühlingsangebote.",
-    summer: "Sonnige Grüße! ☀️ Sichern Sie sich coole Sommerdeals.",
-    autumn: "Herbstliche Highlights 🍁 – Jetzt tolle Rabatte entdecken.",
-    winter: "Winterwunderland ❄️ – Unsere besten Angebote für kalte Tage."
-  };
-
-  nachricht.value = messages[season] || "";
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  handleKampagnentypChange(); // in case it's pre-selected
-});
-</script>
-
-
+  </div>
 </body>
 </html>
+
+<!-- JavaScript for dynamic behavior -->
+<script>
+  const kampagnenTypen = {
+    ereignis: {
+      birthday: "🎂 Geburtstag",
+      product_launch: "📈 Produkteinführung",
+      anniversary: "🌟 Jubiläum",
+      grand_opening: "🏢 Neueröffnung",
+      sponsorship: "🏆 Sponsoring",
+      contest: "🏅 Wettbewerb",
+      partnership: "👥 Kooperation"
+    },
+    zeit: {
+      christmas: "🎄 Weihnachten",
+      easter: "🐣 Ostern",
+      valentines: "💕 Valentinstag",
+      black_friday: "🛍️ Black Friday",
+      new_year: "🎆 Neujahr",
+      back_to_school: "🏫 Back to School / Uni",
+      seasonal: "🌌 Saisonal"
+    },
+    benutzerdefiniert: {
+      custom: "⚙️ Benutzerdefiniert"
+    }
+  };
+
+  function handleKampagnentypChange() {
+    const typ = document.getElementById("kampagnentyp").value;
+    const lang = document.getElementById("language").value;
+    const subject = document.getElementById("betreff");
+    const message = document.getElementById("nachricht");
+
+    const entry = data[lang][typ];
+    if (typ === "custom") {
+      subject.value = "";
+      message.value = "";
+      return;
+    }
+    if (entry) {
+      subject.value = entry[0];
+      message.value = entry[1];
+    }
+  }
+
+  function filterKampagnenTypen() {
+    const kategorie = document.getElementById("kampagnenkategorie").value;
+    const kampagnentypSelect = document.getElementById("kampagnentyp");
+    const wrapper = document.getElementById("kampagnentyp_wrapper");
+
+    kampagnentypSelect.innerHTML = "";
+    wrapper.classList.toggle("hidden", !kategorie);
+
+    if (!kategorie || !kampagnenTypen[kategorie]) return;
+
+    const options = kampagnenTypen[kategorie];
+    for (const key in options) {
+      const opt = document.createElement("option");
+      opt.value = key;
+      opt.textContent = options[key];
+      kampagnentypSelect.appendChild(opt);
+    }
+
+    handleKampagnentypChange();
+  }
+
+  
+    const data = {
+      de: {
+        birthday: ["Alles Gute zum Geburtstag! 🎂", "Feiern Sie mit uns – entdecken Sie Ihr exklusives Geburtstagsangebot!"],
+        product_launch: ["Produktneuheit entdecken! 📈", "Wir präsentieren unsere neueste Innovation – jetzt mehr erfahren!"],
+        anniversary: ["Wir feiern Jubiläum! 🌟", "Danke für Ihre Treue! Entdecken Sie unsere Jubiläumsangebote."],
+        grand_opening: ["Neueröffnung! 🏢", "Besuchen Sie unsere neue Filiale und sichern Sie sich Eröffnungsrabatte!"],
+        sponsorship: ["Wir unterstützen Events! 🏆", "Jetzt mehr über unsere aktuellen Sponsoring-Aktivitäten erfahren."],
+        contest: ["Mitmachen & Gewinnen! 🏅", "Nehmen Sie an unserem Gewinnspiel teil und sichern Sie sich tolle Preise!"],
+        partnership: ["Neue Kooperation! 👥", "Gemeinsam stärker – entdecken Sie unsere neue Partnerschaft."],
+  
+        christmas: ["Frohe Weihnachten! 🎄", "Wir haben ein Geschenk für Sie: 25 % Rabatt auf alle Buchungen bis zum 24. Dezember! Jetzt buchen und sparen!"],
+        easter: ["Frohe Ostern! 🐣", "Sichern Sie sich unser Ostergeschenk – exklusive Frühjahrsangebote für Sie."],
+        valentines: ["Happy Valentinstag 💕", "Liebe schenken: 20% Rabatt auf alle Lieblingsprodukte für Ihre Liebsten."],
+        black_friday: ["Black Friday Deals 🛍️", "Nur für kurze Zeit: Mega-Rabatte auf unser gesamtes Sortiment."],
+        new_year: ["Willkommen 2025! 🎆", "Starten Sie erfolgreich ins neue Jahr mit unseren exklusiven Angeboten."],
+        back_to_school: ["Back to School/Uni 📚", "Zum Semesterstart: Alles, was Sie brauchen – jetzt entdecken!"]
+      },
+      en: {
+        birthday: ["Happy Birthday! 🎂", "Celebrate with us – discover your exclusive birthday offer!"],
+        product_launch: ["New Product Launch! 📈", "Introducing our latest innovation – check it out now!"],
+        anniversary: ["We're Celebrating! 🌟", "Thanks for your loyalty – enjoy our anniversary offers!"],
+        grand_opening: ["Grand Opening! 🏢", "Visit our new location and enjoy opening discounts!"],
+        sponsorship: ["We Support Events! 🏆", "Learn more about our current sponsorships."],
+        contest: ["Join & Win! 🏅", "Take part in our contest and win great prizes!"],
+        partnership: ["New Partnership! 👥", "Stronger together – explore our new collaboration."],
+  
+        christmas: ["Merry Christmas! 🎄", "Enjoy the festive season with 25% off all bookings until December 24th. Book now and save!"],
+        easter: ["Happy Easter! 🐣", "Treat yourself to our Easter deals – spring into savings!"],
+        valentines: ["Valentine's Day 💕", "Share the love: 20% off selected gifts for your special someone."],
+        black_friday: ["Black Friday Deals 🛍️", "Only for a short time: Huge discounts on everything you love."],
+        new_year: ["Welcome 2025! 🎆", "Kick off the new year with exclusive offers just for you."],
+        back_to_school: ["Back to School / Uni 📚", "Get ready for the semester with our best essentials."]
+      }
+    };
+  
+   
+  
+  
+  function setSeasonalMessage() {
+    const season = document.getElementById("season_select").value;
+    const language = document.getElementById("language").value;
+    const subject = document.getElementById("betreff");
+    const message = document.getElementById("nachricht");
+  
+    const seasons = {
+      de: {
+        spring: ["Frühlingsgrüße! 🌸", "Entdecken Sie unsere neuen Frühlingsangebote und starten Sie frisch in die Saison."],
+        summer: ["Sommer, Sonne, Angebote! ☀️", "Jetzt coole Sommer-Deals entdecken – nur für kurze Zeit!"],
+        autumn: ["Goldener Herbst 🍂", "Starke Angebote für stürmische Tage – jetzt sparen!"],
+        winter: ["Winterwunderland ❄️", "Heiße Preise für kalte Tage – entdecken Sie unsere Winter-Highlights!"]
+      },
+      en: {
+        spring: ["Spring Greetings! 🌸", "Fresh offers for a fresh season – explore now!"],
+        summer: ["Summer Vibes ☀️", "Enjoy hot summer deals – for a limited time only!"],
+        autumn: ["Golden Autumn 🍂", "Great savings for cozy days – discover now!"],
+        winter: ["Winter Wonderland ❄️", "Hot deals for cold days – explore our best winter picks!"]
+      }
+    };
+  
+    const entry = seasons[language][season];
+    if (entry) {
+      subject.value = entry[0];
+      message.value = entry[1];
+    }
+  }
+  
+  document.getElementById("kategorie").addEventListener("change", function () {
+    const value = this.value;
+    const language = document.getElementById("language").value;
+    const subject = document.getElementById("betreff");
+    const message = document.getElementById("nachricht");
+  
+    const segments = {
+      de: {
+        tier_a: ["Exklusiv für Sie – Unsere Top-Kunden", "Als Tier A Kunde genießen Sie besondere Vorteile. Heute schenken wir Ihnen 15 % Rabatt auf Ihre nächste Buchung!"],
+        tier_b: ["Dankeschön für Ihre Treue", "Profitieren Sie als treuer Kunde von 10 % Rabatt auf Ihre nächste Bestellung."],
+        tier_c: ["Willkommen zurück!", "Wir haben Sie vermisst – jetzt 20 % Rabatt für Ihr Comeback!"]
+      },
+      en: {
+        tier_a: ["Exclusive Benefits for You", "As a Tier A customer, enjoy 15% off your next booking – just for you!"],
+        tier_b: ["Thanks for Your Loyalty", "As a loyal customer, get 10% off your next order."],
+        tier_c: ["We Miss You!", "Come back now and enjoy 20% off as a welcome gift!"]
+      }
+    };
+  
+    if (segments[language][value]) {
+      subject.value = segments[language][value][0];
+      message.value = segments[language][value][1];
+    }
+  });
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    handleKampagnentypChange();
+  });
+  
+  function toggleZielgruppe(type) {
+    document.getElementById("gruppe_fields").classList.toggle("hidden", type !== 'gruppe');
+    document.getElementById("individuell_fields").classList.toggle("hidden", type !== 'individuell');
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    filterKampagnenTypen();
+    handleKampagnentypChange();
+
+    // Startdatum: Heute als Minimum
+    document.getElementById("startdatum").min = new Date().toISOString().split("T")[0];
+  });
+
+  document.querySelector("form").addEventListener("submit", function(e) {
+    const kundenTyp = document.querySelector('input[name="zielgruppe_typ"]:checked').value;
+
+    if (kundenTyp === "individuell") {
+      const kundenIdInput = document.getElementById("kunden_id");
+      const kundenId = kundenIdInput.value.trim();
+      const kundenIdRegex = /^[A-Za-z]{2}[0-9]{6}$/;
+      if (!kundenIdRegex.test(kundenId)) {
+        alert("Die Kunden-ID muss mit 2 Buchstaben beginnen, gefolgt von 6 Ziffern (z. B. AB123456).");
+        kundenIdInput.focus();
+        e.preventDefault();
+        return;
+      }
+
+      const emailInput = document.getElementById("email");
+      const email = emailInput.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("Bitte gib eine gültige E-Mail-Adresse ein (z. B. max@example.com).");
+        emailInput.focus();
+        e.preventDefault();
+        return;
+      }
+    }
+
+    const startDateStr = document.getElementById("startdatum").value;
+    const endDateStr = document.getElementById("enddatum").value;
+
+    if (startDateStr && endDateStr) {
+      const start = new Date(startDateStr);
+      const end = new Date(endDateStr);
+
+      if (end < start) {
+        alert("Das Enddatum darf nicht vor dem Startdatum liegen.");
+        document.getElementById("enddatum").focus();
+        e.preventDefault();
+        return;
+      }
+    }
+
+    const kampagnentyp = document.getElementById("kampagnentyp").value;
+    if (!kampagnentyp) {
+      alert("Bitte wähle einen Kampagnentyp.");
+      document.getElementById("kampagnentyp").focus();
+      e.preventDefault();
+    }
+  });
+</script>
+</body>
+</html>  
+
