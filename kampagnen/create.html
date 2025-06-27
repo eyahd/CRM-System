@@ -391,6 +391,27 @@ select:focus {
     }
   });
 </script>
+
+<script>
+  // Logout-Button dynamisch einfügen
+  const logoutLink = document.createElement("a");
+  logoutLink.href = "logout.php";
+  logoutLink.textContent = "Logout";
+  logoutLink.style.position = "fixed";
+  logoutLink.style.top = "20px";
+  logoutLink.style.right = "20px";
+  logoutLink.style.backgroundColor = "#e74c3c";
+  logoutLink.style.color = "white";
+  logoutLink.style.padding = "10px 15px";
+  logoutLink.style.borderRadius = "8px";
+  logoutLink.style.textDecoration = "none";
+  logoutLink.style.fontWeight = "bold";
+  logoutLink.style.zIndex = "1000";
+  logoutLink.onmouseover = () => logoutLink.style.backgroundColor = "#c0392b";
+  logoutLink.onmouseout = () => logoutLink.style.backgroundColor = "#e74c3c";
+  document.body.appendChild(logoutLink);
+</script>
+
 </body>
 </html>  
 
