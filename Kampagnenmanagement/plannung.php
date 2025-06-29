@@ -386,7 +386,13 @@ document.addEventListener("DOMContentLoaded", function () {
     logoutLink.onmouseover = () => logoutLink.style.backgroundColor = "#c0392b";
     logoutLink.onmouseout = () => logoutLink.style.backgroundColor = "#e74c3c";
     document.body.appendChild(logoutLink);
+}
+if (!empty($startdatum) && !empty($enddatum)) {
+    if ($enddatum < $startdatum) {
+        $errors[] = "Das Enddatum darf nicht vor dem Startdatum liegen.";
+    }
 });
+
 </script>
 
 
