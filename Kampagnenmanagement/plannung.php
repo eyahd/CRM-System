@@ -228,7 +228,7 @@ textarea:focus {
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    // DOM elements
+    // DOM 
     const kampagnenArt = document.getElementById("kampagnenArt");
     const kampagnenTyp = document.getElementById("kampagnen_typ");
     const segmentSelect = document.getElementById("segment");
