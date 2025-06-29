@@ -5,7 +5,7 @@ if ($conn->connect_error) {
     die("Verbindung fehlgeschlagen: " . $conn->connect_error);
 }
 
-// Segmentoptionen aus Datenbank laden (einmalig)
+// Segmentoptionen aus Datenbank laden 
 $segments = [];
 $segment_result = $conn->query("SELECT DISTINCT segment FROM kategorie");
 if ($segment_result) {
