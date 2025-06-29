@@ -186,6 +186,9 @@ function showStatusMessage() {
     case "passwort_geaendert":
       messageBox.textContent = "Ihr Passwort wurde erfolgreich geändert.";
       break;
+    case "benutzer_geloescht":
+      messageBox.textContent = "Der Benutzer wurde erfolgreich gelöscht.";
+      break;
     default:
       return;
   }

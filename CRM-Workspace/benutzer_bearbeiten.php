@@ -16,8 +16,16 @@ $stmt->execute([':id' => $id]);
 $benutzer = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$benutzer) die("Benutzer nicht gefunden.");
 
-// Wenn das Formular gesendet wurde
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Benutzer löschen
+if (isset($_POST['benutzer_loeschen'])) {
+    $stmt = $pdo->prepare("DELETE FROM kunden WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+    header("Location: admin_dashboard.php?status=benutzer_geloescht");
+    exit;
+}
+
+// Benutzer aktualisieren
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['benutzer_loeschen'])) {
     $rolle = $_POST['rolle'] === 'admin' ? 'admin' : 'kunde';
     $typ = ($rolle === 'kunde') ? $_POST['typ'] ?? null : null;
 
@@ -42,23 +50,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 
     $update = "UPDATE kunden SET
-    vorname = :vorname,
-    nachname = :nachname,
-    email = :email,
-    telefon = :telefon,
-    strasse = :strasse,
-    plz = :plz,
-    ort = :ort,
-    land = :land,
-    firmenname = :firmenname,
-    ust_id = :ust_id,
-    bonitaet_score = :bonitaet_score,
-    iban = :iban,
-    bic = :bic,
-    rolle = :rolle,
-    typ = :typ,
-    offene_rechnungen = :offene_rechnungen
-    WHERE id = :id";
+        vorname = :vorname,
+        nachname = :nachname,
+        email = :email,
+        telefon = :telefon,
+        strasse = :strasse,
+        plz = :plz,
+        ort = :ort,
+        land = :land,
+        firmenname = :firmenname,
+        ust_id = :ust_id,
+        bonitaet_score = :bonitaet_score,
+        iban = :iban,
+        bic = :bic,
+        rolle = :rolle,
+        typ = :typ,
+        offene_rechnungen = :offene_rechnungen
+        WHERE id = :id";
 
     $stmt = $pdo->prepare($update);
     $stmt->execute($daten);
@@ -144,7 +152,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="geschaeft" <?= $benutzer['typ'] === 'geschaeft' ? 'selected' : '' ?>>Geschäftskunde</option>
             </select><br>
         </div>
-        <button type="submit">Speichern</button>
+
+        
+            <button type="submit">Speichern</button>
+        </div>
+    </form>
+
+    <form method="POST" onsubmit="return confirm('Möchten Sie diesen Benutzer wirklich löschen?');" style="margin-top: 1rem;" class="center-button">
+        <input type="hidden" name="benutzer_loeschen" value="1">
+        <button type="submit" class="button button-danger">Benutzer löschen</button>
     </form>
 
     <script src="js/iban.js"></script>
