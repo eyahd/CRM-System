@@ -12,13 +12,13 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'eya.hamdi2004@gmail.com';
-    $mail->Password   = 'cgdn vaqc mxsw ynky';  // App Password
+    $mail->Username   = 
+    $mail->Password   = 
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
-    $mail->setFrom('eya.hamdi2004@gmail.com', 'Citycar24');
-    $mail->addAddress('eya.hamdi@studmail.w-hs.de');
+    $mail->setFrom('', 'Citycar24');
+    $mail->addAddress('');
     $mail->CharSet = 'UTF-8';
     $mail->Encoding = 'base64';
 
