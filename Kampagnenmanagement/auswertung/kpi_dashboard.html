@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>KPI Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .card h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    .value {
+      font-size: 28px;
+      color: #2c3e50;
+    }
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>KPI Dashboard</h1>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Flottenauslastung</h2>
+      <div class="value" id="fleetUtilization">–</div>
+    </div>
+    <div class="card">
+      <h2>Ø Mietdauer</h2>
+      <div class="value" id="avgRentalDuration">–</div>
+    </div>
+    <div class="card">
+      <h2>Umsatz pro Tag</h2>
+      <div class="value" id="revenuePerDay">–</div>
+    </div>
+    <div class="card">
+      <h2>Gesamtbuchungen</h2>
+      <div class="value" id="bookings">–</div>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top: 40px;">
+    <div class="card">
+      <h2>Top Städte nach Umsatz</h2>
+      <canvas id="citiesChart"></canvas>
+    </div>
+    <div class="card">
+      <h2>Top Fahrzeugkategorien</h2>
+      <canvas id="categoriesChart"></canvas>
+    </div>
+    <div class="card">
+      <h2>Aktive Kampagnen</h2>
+      <canvas id="campaignsChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    fetch('api/kpi.php')
+      .then(res => res.json())
+      .then(data => {
+        // KPI-Werte anzeigen
+        document.getElementById('fleetUtilization').textContent = data.fleetUtilization + '%';
+        document.getElementById('avgRentalDuration').textContent = data.avgRentalDuration + ' Tage';
+        document.getElementById('revenuePerDay').textContent = data.revenuePerDay.toLocaleString('de-DE') + ' €';
+        document.getElementById('bookings').textContent = data.bookings;
+
+        // Top Städte Diagramm
+        new Chart(document.getElementById('citiesChart'), {
+          type: 'bar',
+          data: {
+            labels: data.topCities.map(e => e.stadt),
+            datasets: [{
+              label: 'Umsatz (€)',
+              data: data.topCities.map(e => e.rentals),
+              backgroundColor: '#3498db'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { callback: value => value.toLocaleString('de-DE') + ' €' }
+              }
+            }
+          }
+        });
+
+        // Fahrzeugkategorien
+        new Chart(document.getElementById('categoriesChart'), {
+          type: 'pie',
+          data: {
+            labels: data.topCategories.map(e => e.fahrzeugkategorie),
+            datasets: [{
+              label: 'Einnahmen (€)',
+              data: data.topCategories.map(e => e.revenue),
+              backgroundColor: ['#1abc9c', '#f1c40f', '#e74c3c']
+            }]
+          }
+        });
+
+        // Kampagnen
+        new Chart(document.getElementById('campaignsChart'), {
+          type: 'doughnut',
+          data: {
+            labels: data.campaigns.map(e => e.kampagne),
+            datasets: [{
+              label: 'Buchungen',
+              data: data.campaigns.map(e => e.rentals),
+              backgroundColor: ['#8e44ad', '#2980b9', '#16a085']
+            }]
+          }
+        });
+      });
+  </script>
+</body>
+</html>
